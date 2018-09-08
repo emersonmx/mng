@@ -3,7 +3,8 @@
 
 #include <assert.h>
 
-#define RETURN_VALUE_IF_TRUE(X, R) if (X) { \
+#define RETURN_VALUE_IF_TRUE(X, R) \
+    if (X) { \
         return R; \
     }
 
