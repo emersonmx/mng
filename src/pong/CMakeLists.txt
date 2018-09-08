@@ -9,6 +9,7 @@ add_dependencies(pong
 target_link_libraries(pong
     mng
 
+    m
     ${SDL2_LIBRARIES}
     ${SDL2IMAGE_LIBRARIES}
     ${SDL2TTF_LIBRARIES}

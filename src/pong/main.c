@@ -3,6 +3,7 @@
 
 #include <SDL.h>
 
+#include <mng/vector2.h>
 #include <mng/window.h>
 #include <mng/renderer.h>
 
@@ -44,10 +45,8 @@ int main()
     atexit(Finalize);
     Initialize();
 
-    float x = 0;
-    float y = 0;
-    float vx = 1;
-    float vy = 1;
+    Vector2 p = {0, 0};
+    Vector2 v = {1, 1};
     float speed = 5;
     while (running) {
         while (SDL_PollEvent(&event)) {
@@ -57,19 +56,19 @@ int main()
         }
 
         float delta = 1/60.f;
-        if (x < 0 || x > 800) {
-            vx = -vx;
+        if (p.x < 0 || p.x > 800) {
+            v.x = -v.x;
         }
-        if (y < 0 || y > 600) {
-            vy = -vy;
+        if (p.y < 0 || p.y > 600) {
+            v.y = -v.y;
         }
-        x += vx * speed * delta;
-        y += vy * speed * delta;
+
+        p = vector2_add(p, vector2_multiply(vector2_normalized(v), speed * delta));
 
         renderer_clear(renderer);
 
         renderer_set_draw_color(renderer, (Color){255, 0, 0, 255});
-        renderer_fill_rect(renderer, (Rect){x, y, 10, 10});
+        renderer_fill_rect(renderer, (Rect){p.x, p.y, 10, 10});
 
         renderer_present(renderer);
     }
