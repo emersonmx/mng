@@ -19,9 +19,11 @@ Renderer* renderer_new(Window* window)
     return renderer;
 }
 
-void renderer_destroy(Renderer* renderer)
+void renderer_free(Renderer* renderer)
 {
     RETURN_IF_NULL(renderer);
+    SDL_DestroyRenderer(renderer->handler);
+    renderer->handler = NULL;
     free(renderer);
 }
 

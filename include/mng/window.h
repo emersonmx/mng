@@ -10,7 +10,7 @@ extern "C" {
 typedef struct Window Window;
 
 Window* window_new(const char* title, Size size);
-void window_destroy(Window* window);
+void window_free(Window* window);
 
 #ifdef __cplusplus
 }

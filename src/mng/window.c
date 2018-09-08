@@ -17,8 +17,10 @@ Window* window_new(const char* title, Size size)
     return window;
 }
 
-void window_destroy(Window* window)
+void window_free(Window* window)
 {
     RETURN_IF_NULL(window);
+    SDL_DestroyWindow(window->handler);
+    window->handler = NULL;
     free(window);
 }

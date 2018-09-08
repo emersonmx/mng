@@ -33,8 +33,8 @@ void Initialize()
 
 void Finalize()
 {
-    renderer_destroy(renderer);
-    window_destroy(window);
+    renderer_free(renderer);
+    window_free(window);
 
     SDL_Quit();
 }
