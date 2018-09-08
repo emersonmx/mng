@@ -1,0 +1,50 @@
+#include <mng/renderer.h>
+
+#include <mng/macros.h>
+#include <mng/window_impl.h>
+#include <mng/renderer_impl.h>
+
+Renderer* renderer_new(Window* window)
+{
+    ASSERT_VALID_OBJECT(window);
+
+    Renderer* renderer = malloc(sizeof(Renderer));
+    RETURN_NULL_IF_NULL(renderer);
+
+    renderer->handler = SDL_CreateRenderer(window->handler, -1, SDL_RENDERER_ACCELERATED);
+    RETURN_NULL_IF_NULL(renderer->handler);
+
+    return renderer;
+}
+
+void renderer_destroy(Renderer* renderer)
+{
+    RETURN_IF_NULL(renderer);
+    free(renderer);
+}
+
+void renderer_set_draw_color(Renderer* renderer, Color color)
+{
+    ASSERT_VALID_OBJECT(renderer);
+    SDL_SetRenderDrawColor(renderer->handler, color.red, color.green, color.blue, color.alpha);
+}
+
+void renderer_fill_rect(Renderer* renderer, Rect rect)
+{
+    ASSERT_VALID_OBJECT(renderer);
+    SDL_Rect r = {rect.x, rect.y, rect.width, rect.height};
+    SDL_RenderFillRect(renderer->handler, &r);
+}
+
+void renderer_clear(Renderer* renderer)
+{
+    ASSERT_VALID_OBJECT(renderer);
+    SDL_RenderClear(renderer->handler);
+}
+
+void renderer_present(Renderer* renderer)
+{
+    ASSERT_VALID_OBJECT(renderer);
+    SDL_RenderPresent(renderer->handler);
+}
+
