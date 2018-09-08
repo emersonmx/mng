@@ -66,7 +66,6 @@ int main()
         x += vx * speed * delta;
         y += vy * speed * delta;
 
-        renderer_set_draw_color(renderer, (Color){0, 0, 0, 255});
         renderer_clear(renderer);
 
         renderer_set_draw_color(renderer, (Color){255, 0, 0, 255});
