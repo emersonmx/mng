@@ -6,13 +6,13 @@
 Window* window_new(const char* title, Size size)
 {
     Window* window = malloc(sizeof(Window));
-    RETURN_NULL_IF_NULL(window);
+    RETURN_VALUE_IF_NULL(window, NULL);
 
     window->handler = SDL_CreateWindow(title,
         SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
         size.width, size.height, SDL_WINDOW_SHOWN
     );
-    RETURN_NULL_IF_NULL(window->handler);
+    RETURN_VALUE_IF_NULL(window->handler, NULL);
 
     return window;
 }

@@ -9,10 +9,10 @@ Renderer* renderer_new(Window* window)
     ASSERT_VALID_OBJECT(window);
 
     Renderer* renderer = malloc(sizeof(Renderer));
-    RETURN_NULL_IF_NULL(renderer);
+    RETURN_VALUE_IF_NULL(renderer, NULL);
 
     renderer->handler = SDL_CreateRenderer(window->handler, -1, SDL_RENDERER_ACCELERATED);
-    RETURN_NULL_IF_NULL(renderer->handler);
+    RETURN_VALUE_IF_NULL(renderer->handler, NULL);
 
     renderer->clear_color = (Color){0, 0, 0, 255};
 
