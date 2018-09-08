@@ -3,8 +3,11 @@
 
 #include <SDL_render.h>
 
+#include <mng/types.h>
+
 struct Renderer {
     SDL_Renderer* handler;
+    Color clear_color;
 };
 
 #endif /* MNG_RENDERER_IMPL_H */

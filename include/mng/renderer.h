@@ -12,6 +12,7 @@ typedef struct Renderer Renderer;
 Renderer* renderer_new(Window* window);
 void renderer_destroy(Renderer* renderer);
 
+void renderer_set_clear_color(Renderer* renderer, Color color);
 void renderer_set_draw_color(Renderer* renderer, Color color);
 
 void renderer_fill_rect(Renderer* renderer, Rect rect);

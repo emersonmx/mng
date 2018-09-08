@@ -14,6 +14,8 @@ Renderer* renderer_new(Window* window)
     renderer->handler = SDL_CreateRenderer(window->handler, -1, SDL_RENDERER_ACCELERATED);
     RETURN_NULL_IF_NULL(renderer->handler);
 
+    renderer->clear_color = (Color){0, 0, 0, 255};
+
     return renderer;
 }
 
@@ -21,6 +23,12 @@ void renderer_destroy(Renderer* renderer)
 {
     RETURN_IF_NULL(renderer);
     free(renderer);
+}
+
+void renderer_set_clear_color(Renderer* renderer, Color color)
+{
+    ASSERT_VALID_OBJECT(renderer);
+    renderer->clear_color = color;
 }
 
 void renderer_set_draw_color(Renderer* renderer, Color color)
@@ -39,6 +47,7 @@ void renderer_fill_rect(Renderer* renderer, Rect rect)
 void renderer_clear(Renderer* renderer)
 {
     ASSERT_VALID_OBJECT(renderer);
+    renderer_set_draw_color(renderer, renderer->clear_color);
     SDL_RenderClear(renderer->handler);
 }
 
