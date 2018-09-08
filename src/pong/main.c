@@ -47,24 +47,48 @@ int main()
 
     Vector2 p = {0, 0};
     Vector2 v = {1, 1};
-    float speed = 5;
+    float speed = 200;
+    float a_second = 0;
+    Uint64 now = SDL_GetPerformanceCounter();
+    Uint64 last_count = SDL_GetPerformanceCounter();
+    float delta = 1/60.f;
     while (running) {
+        // start_loop
+        now = SDL_GetPerformanceCounter();
+
+        double deltaTime = (double)((now - last_count)*1000 / (double)SDL_GetPerformanceFrequency());
+        last_count = SDL_GetPerformanceCounter();
+        a_second += (deltaTime * 0.001);
+
+        // process input
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
                 running = false;
             }
         }
 
-        float delta = 1/60.f;
-        if (p.x < 0 || p.x > 800) {
-            v.x = -v.x;
-        }
-        if (p.y < 0 || p.y > 600) {
-            v.y = -v.y;
+        // fixed update
+        if (a_second >= delta) {
+            p = vector2_add(p, vector2_multiply(vector2_normalized(v), speed * delta));
+
+            a_second -= delta;
         }
 
-        p = vector2_add(p, vector2_multiply(vector2_normalized(v), speed * delta));
+        // update
+        if (p.x < 0) {
+            v.x = 1;
+        }
+        if (p.x + 10 > 800) {
+            v.x = -1;
+        }
+        if (p.y < 0) {
+            v.y = 1;
+        }
+        if (p.y + 10 > 600) {
+            v.y = -1;
+        }
 
+        // render
         renderer_clear(renderer);
 
         renderer_set_draw_color(renderer, (Color){255, 0, 0, 255});
