@@ -1,11 +1,9 @@
 #include <mng/vector2.h>
 
-#include <stdio.h>
 #include <math.h>
 
 Vector2 vector2_add(Vector2 a, Vector2 b)
 {
-    printf("%f, %f\n", b.x, b.y);
     return (Vector2){a.x + b.x, a.y + b.y};
 }
 
