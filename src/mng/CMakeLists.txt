@@ -1,7 +1,8 @@
 add_library(mng
     vector2.c
-    window.c
-    renderer.c
+    transform.c
     texture.c
     loaders.c
+    window.c
+    renderer.c
 )

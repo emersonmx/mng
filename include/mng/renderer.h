@@ -1,8 +1,9 @@
 #ifndef MNG_RENDERER_H
 #define MNG_RENDERER_H
 
-#include <mng/window.h>
+#include <mng/transform.h>
 #include <mng/texture.h>
+#include <mng/window.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -17,6 +18,8 @@ void renderer_set_clear_color(Renderer* renderer, Color color);
 void renderer_set_draw_color(Renderer* renderer, Color color);
 
 void renderer_fill_rect(Renderer* renderer, Rect rect);
+
+void renderer_draw_texture(Renderer* renderer, Texture* texture, Transform transform);
 
 void renderer_clear(Renderer* renderer);
 void renderer_present(Renderer* renderer);
