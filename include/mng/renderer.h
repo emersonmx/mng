@@ -2,6 +2,7 @@
 #define MNG_RENDERER_H
 
 #include <mng/window.h>
+#include <mng/texture.h>
 
 #ifdef __cplusplus
 extern "C" {
