@@ -1,7 +1,7 @@
 #ifndef MNG_RENDERER_H
 #define MNG_RENDERER_H
 
-#include <mng/transform.h>
+#include <mng/renderstate.h>
 #include <mng/texture.h>
 #include <mng/window.h>
 
@@ -19,7 +19,7 @@ void renderer_set_draw_color(Renderer* renderer, Color color);
 
 void renderer_fill_rect(Renderer* renderer, Rect rect);
 
-void renderer_draw_texture(Renderer* renderer, Texture* texture, Transform transform);
+void renderer_draw_texture(Renderer* renderer, Texture* texture, RenderState state);
 
 void renderer_clear(Renderer* renderer);
 void renderer_present(Renderer* renderer);

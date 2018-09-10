@@ -33,7 +33,7 @@ void Initialize()
         return;
     }
 
-    texture = load_texture(renderer, "hello.png");
+    texture = load_texture(renderer, "assets/hello.png");
 }
 
 void Finalize()
@@ -58,11 +58,12 @@ int main()
     Uint64 now = SDL_GetPerformanceCounter();
     Uint64 last_count = SDL_GetPerformanceCounter();
     float delta = 1/60.f;
-    Transform transform = transform_reseted();
+    RenderState state = renderstate_reseted();
     Size s = texture_size(texture);
-    transform.scale = (Vector2){-0.6, -0.6};
-    transform.position = (Vector2){ s.width / 2.0f, s.height / 2.0f };
-    transform.origin = (Vector2){ s.width / 2.0f, s.height / 2.0f };
+    state.region = (Rect){200, 200, s.width-200, s.height-200};
+    state.scale = (Vector2){-0.6, -0.6};
+    state.position = (Point){ s.width / 2.0f, s.height / 2.0f };
+    state.origin = (Point){ s.width / 2.0f, s.height / 2.0f };
     while (running) {
         // start_loop
         now = SDL_GetPerformanceCounter();
@@ -82,6 +83,8 @@ int main()
         if (a_second >= delta) {
             p = vector2_add(p, vector2_multiply(vector2_normalized(v), speed * delta));
 
+            state.rotation += delta * 50;
+
             a_second -= delta;
         }
 
@@ -99,12 +102,10 @@ int main()
             v.y = -1;
         }
 
-        transform.rotation += delta * 5;
-
         // render
         renderer_clear(renderer);
 
-        renderer_draw_texture(renderer, texture, transform);
+        renderer_draw_texture(renderer, texture, state);
         renderer_set_draw_color(renderer, (Color){255, 0, 0, 255});
         renderer_fill_rect(renderer, (Rect){p.x, p.y, 10, 10});
 

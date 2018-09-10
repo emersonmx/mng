@@ -14,7 +14,7 @@ Renderer* renderer_new(Window* window)
     Renderer* renderer = malloc(sizeof(Renderer));
     RETURN_VALUE_IF_NULL(renderer, NULL);
 
-    renderer->handler = SDL_CreateRenderer(window->handler, -1, SDL_RENDERER_ACCELERATED);
+    renderer->handler = SDL_CreateRenderer(window->handler, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     RETURN_VALUE_IF_NULL(renderer->handler, NULL);
 
     renderer->clear_color = (Color){0, 0, 0, 255};
@@ -49,35 +49,34 @@ void renderer_fill_rect(Renderer* renderer, Rect rect)
     SDL_RenderFillRect(renderer->handler, &r);
 }
 
-void renderer_draw_texture(Renderer* renderer, Texture* texture, Transform transform)
+void renderer_draw_texture(Renderer* renderer, Texture* texture, RenderState state)
 {
     ASSERT_VALID_OBJECT(renderer);
     RETURN_IF_NULL(texture);
     RETURN_IF_NULL(texture->handler);
 
-    double angle = transform.rotation;
+    double angle = state.rotation;
     SDL_Point center = {
-        transform.origin.x * fabsf(transform.scale.x),
-        transform.origin.y * fabsf(transform.scale.y)
+        state.origin.x * fabsf(state.scale.x),
+        state.origin.y * fabsf(state.scale.y)
     };
 
     SDL_Rect srcrect = {
-        0, 0,
-        texture->size.width,
-        texture->size.height
+        state.region.x, state.region.y,
+        state.region.width, state.region.height
     };
     SDL_Rect dstrect = {
-        transform.position.x - center.x,
-        transform.position.y - center.y,
-        texture->size.width * fabsf(transform.scale.x),
-        texture->size.height * fabsf(transform.scale.y)
+        state.position.x - center.x,
+        state.position.y - center.y,
+        texture->size.width * fabsf(state.scale.x),
+        texture->size.height * fabsf(state.scale.y)
     };
 
     SDL_RendererFlip flip = SDL_FLIP_NONE;
-    if (transform.scale.x < 0) {
+    if (state.scale.x < 0.0f) {
         flip = flip | SDL_FLIP_HORIZONTAL;
     }
-    if (transform.scale.y < 0) {
+    if (state.scale.y < 0.0f) {
         flip = flip | SDL_FLIP_VERTICAL;
     }
 
