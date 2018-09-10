@@ -1,12 +1,12 @@
-add_executable(pong
+add_executable(hello
     main.c
 )
 
-add_dependencies(pong
+add_dependencies(hello
     mng
 )
 
-target_link_libraries(pong
+target_link_libraries(hello
     mng
 
     m
