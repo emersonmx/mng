@@ -58,7 +58,7 @@ int main()
     Uint64 now = SDL_GetPerformanceCounter();
     Uint64 last_count = SDL_GetPerformanceCounter();
     float delta = 1/60.f;
-    RenderStates states = renderstates_reseted();
+    DrawingStates states = drawingstates_reseted();
     Size s = texture_size(texture);
     states.region = (Rect){200, 200, s.width-200, s.height-200};
     states.scale = (Vector2){-0.6, -0.6};

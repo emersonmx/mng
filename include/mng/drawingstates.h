@@ -1,5 +1,5 @@
-#ifndef MNG_RENDERSTATES_H
-#define MNG_RENDERSTATES_H
+#ifndef MNG_DRAWINGSTATES_H
+#define MNG_DRAWINGSTATES_H
 
 #include <mng/types.h>
 #include <mng/vector2.h>
@@ -8,18 +8,18 @@
 extern "C" {
 #endif
 
-typedef struct RenderStates {
+typedef struct DrawingStates {
     Rect region;
     Point position;
     Vector2 scale;
     float rotation;
     Point origin;
-} RenderStates;
+} DrawingStates;
 
-RenderStates renderstates_reseted();
+DrawingStates drawingstates_reseted();
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* MNG_RENDERSTATES_H */
+#endif /* MNG_DRAWINGSTATES_H */

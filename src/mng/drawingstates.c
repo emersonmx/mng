@@ -1,8 +1,8 @@
-#include <mng/renderstates.h>
+#include <mng/drawingstates.h>
 
-RenderStates renderstates_reseted()
+DrawingStates drawingstates_reseted()
 {
-    return (RenderStates){
+    return (DrawingStates){
         (Rect){0, 0, 0, 0},
         (Point){0, 0},
         (Vector2){1.0f, 1.0f},

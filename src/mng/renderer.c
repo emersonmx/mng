@@ -49,7 +49,7 @@ void renderer_fill_rect(Renderer* renderer, Rect rect)
     SDL_RenderFillRect(renderer->handler, &r);
 }
 
-void renderer_draw_texture(Renderer* renderer, Texture* texture, RenderStates states)
+void renderer_draw_texture(Renderer* renderer, Texture* texture, DrawingStates states)
 {
     ASSERT_VALID_OBJECT(renderer);
     RETURN_IF_NULL(texture);
