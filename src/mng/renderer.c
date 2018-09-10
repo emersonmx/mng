@@ -49,34 +49,34 @@ void renderer_fill_rect(Renderer* renderer, Rect rect)
     SDL_RenderFillRect(renderer->handler, &r);
 }
 
-void renderer_draw_texture(Renderer* renderer, Texture* texture, RenderState state)
+void renderer_draw_texture(Renderer* renderer, Texture* texture, RenderStates states)
 {
     ASSERT_VALID_OBJECT(renderer);
     RETURN_IF_NULL(texture);
     RETURN_IF_NULL(texture->handler);
 
-    double angle = state.rotation;
+    double angle = states.rotation;
     SDL_Point center = {
-        state.origin.x * fabsf(state.scale.x),
-        state.origin.y * fabsf(state.scale.y)
+        states.origin.x * fabsf(states.scale.x),
+        states.origin.y * fabsf(states.scale.y)
     };
 
     SDL_Rect srcrect = {
-        state.region.x, state.region.y,
-        state.region.width, state.region.height
+        states.region.x, states.region.y,
+        states.region.width, states.region.height
     };
     SDL_Rect dstrect = {
-        state.position.x - center.x,
-        state.position.y - center.y,
-        texture->size.width * fabsf(state.scale.x),
-        texture->size.height * fabsf(state.scale.y)
+        states.position.x - center.x,
+        states.position.y - center.y,
+        texture->size.width * fabsf(states.scale.x),
+        texture->size.height * fabsf(states.scale.y)
     };
 
     SDL_RendererFlip flip = SDL_FLIP_NONE;
-    if (state.scale.x < 0.0f) {
+    if (states.scale.x < 0.0f) {
         flip = flip | SDL_FLIP_HORIZONTAL;
     }
-    if (state.scale.y < 0.0f) {
+    if (states.scale.y < 0.0f) {
         flip = flip | SDL_FLIP_VERTICAL;
     }
 

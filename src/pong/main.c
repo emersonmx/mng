@@ -58,12 +58,12 @@ int main()
     Uint64 now = SDL_GetPerformanceCounter();
     Uint64 last_count = SDL_GetPerformanceCounter();
     float delta = 1/60.f;
-    RenderState state = renderstate_reseted();
+    RenderStates states = renderstates_reseted();
     Size s = texture_size(texture);
-    state.region = (Rect){200, 200, s.width-200, s.height-200};
-    state.scale = (Vector2){-0.6, -0.6};
-    state.position = (Point){ s.width / 2.0f, s.height / 2.0f };
-    state.origin = (Point){ s.width / 2.0f, s.height / 2.0f };
+    states.region = (Rect){200, 200, s.width-200, s.height-200};
+    states.scale = (Vector2){-0.6, -0.6};
+    states.position = (Point){ s.width / 2.0f, s.height / 2.0f };
+    states.origin = (Point){ s.width / 2.0f, s.height / 2.0f };
     while (running) {
         // start_loop
         now = SDL_GetPerformanceCounter();
@@ -83,7 +83,7 @@ int main()
         if (a_second >= delta) {
             p = vector2_add(p, vector2_multiply(vector2_normalized(v), speed * delta));
 
-            state.rotation += delta * 50;
+            states.rotation += delta * 50;
 
             a_second -= delta;
         }
@@ -105,7 +105,7 @@ int main()
         // render
         renderer_clear(renderer);
 
-        renderer_draw_texture(renderer, texture, state);
+        renderer_draw_texture(renderer, texture, states);
         renderer_set_draw_color(renderer, (Color){255, 0, 0, 255});
         renderer_fill_rect(renderer, (Rect){p.x, p.y, 10, 10});
 

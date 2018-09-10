@@ -4,5 +4,5 @@ add_library(mng
     loaders.c
     window.c
     renderer.c
-    renderstate.c
+    renderstates.c
 )
