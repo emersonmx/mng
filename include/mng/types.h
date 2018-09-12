@@ -1,6 +1,7 @@
 #ifndef MNG_TYPES_H
 #define MNG_TYPES_H
 
+#include <stdbool.h>
 #include <stdint.h>
 
 #ifdef __cplusplus
@@ -30,6 +31,8 @@ typedef struct Rect {
     int width;
     int height;
 } Rect;
+
+bool rect_is_empty(Rect rect);
 
 #ifdef __cplusplus
 }
