@@ -3,7 +3,7 @@ add_library(mng
     vector2.c
     texture.c
     sprite.c
-    loaders.c
+    resources.c
     window.c
     renderer.c
 )

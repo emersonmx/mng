@@ -1,4 +1,4 @@
-#include <mng/loaders.h>
+#include <mng/resources.h>
 
 #include <SDL_image.h>
 

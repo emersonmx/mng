@@ -6,7 +6,7 @@
 #include <mng/vector2.h>
 #include <mng/window.h>
 #include <mng/renderer.h>
-#include <mng/loaders.h>
+#include <mng/resources.h>
 
 bool running = true;
 SDL_Event event;

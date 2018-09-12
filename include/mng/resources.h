@@ -1,5 +1,5 @@
-#ifndef MNG_LOADERS_H
-#define MNG_LOADERS_H
+#ifndef MNG_RESOURCES_H
+#define MNG_RESOURCES_H
 
 #include <mng/renderer.h>
 
@@ -13,4 +13,4 @@ Texture* load_texture(Renderer* renderer, const char* filename);
 }
 #endif
 
-#endif /* MNG_LOADERS_H */
+#endif /* MNG_RESOURCES_H */
