@@ -12,7 +12,7 @@ typedef struct Texture Texture;
 Texture* texture_new();
 void texture_free(Texture* texture);
 
-Size texture_size(Texture* texture);
+Size texture_get_size(Texture* texture);
 
 #ifdef __cplusplus
 }

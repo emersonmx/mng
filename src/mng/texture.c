@@ -21,8 +21,8 @@ void texture_free(Texture* texture)
     free(texture);
 }
 
-Size texture_size(Texture* texture)
+Size texture_get_size(Texture* texture)
 {
-    RETURN_VALUE_IF_NULL(texture, ((Size){0, 0}));
+    ASSERT_VALID_OBJECT(texture);
     return texture->size;
 }
