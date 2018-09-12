@@ -21,6 +21,5 @@ void window_free(Window* window)
 {
     RETURN_IF_NULL(window);
     SDL_DestroyWindow(window->handler);
-    window->handler = NULL;
     free(window);
 }

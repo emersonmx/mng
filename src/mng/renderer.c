@@ -26,7 +26,6 @@ void renderer_free(Renderer* renderer)
 {
     RETURN_IF_NULL(renderer);
     SDL_DestroyRenderer(renderer->handler);
-    renderer->handler = NULL;
     free(renderer);
 }
 

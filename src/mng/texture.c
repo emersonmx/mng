@@ -17,7 +17,6 @@ void texture_free(Texture* texture)
 {
     RETURN_IF_NULL(texture);
     SDL_DestroyTexture(texture->handler);
-    texture->handler = NULL;
     free(texture);
 }
 
