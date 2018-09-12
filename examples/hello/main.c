@@ -13,6 +13,7 @@ SDL_Event event;
 Window* window = NULL;
 Renderer* renderer = NULL;
 Texture* texture = NULL;
+Sprite* sprite = NULL;
 
 void Initialize()
 {
@@ -34,10 +35,13 @@ void Initialize()
     }
 
     texture = load_texture(renderer, "assets/hello.png");
+    sprite = sprite_new();
+    sprite->texture = texture;
 }
 
 void Finalize()
 {
+    sprite_free(sprite);
     texture_free(texture);
 
     renderer_free(renderer);
@@ -58,12 +62,11 @@ int main()
     Uint64 now = SDL_GetPerformanceCounter();
     Uint64 last_count = SDL_GetPerformanceCounter();
     float delta = 1/60.f;
-    DrawTextureParameters states = make_draw_texture_parameters();
-    Size s = texture_size(texture);
-    states.region = (Rect){200, 200, s.width-200, s.height-200};
-    states.scale = (Vector2){-0.6, -0.6};
-    states.position = (Point){ s.width / 2.0f, s.height / 2.0f };
-    states.origin = (Point){ s.width / 2.0f, s.height / 2.0f };
+    Size s = texture_get_size(texture);
+    sprite->region = (Rect){200, 200, s.width-200, s.height-200};
+    sprite->scale = (Vector2){-0.6, 0.6};
+    sprite->position = (Point){s.width / 2.0f, s.height / 2.0f};
+    sprite->origin = (Point){s.width / 2.0f, s.height / 2.0f};
     while (running) {
         // start_loop
         now = SDL_GetPerformanceCounter();
@@ -83,7 +86,7 @@ int main()
         if (a_second >= delta) {
             p = vector2_add(p, vector2_multiply(vector2_normalized(v), speed * delta));
 
-            states.rotation += delta * 50;
+            sprite->rotation += delta * 50;
 
             a_second -= delta;
         }
@@ -105,7 +108,7 @@ int main()
         // render
         renderer_clear(renderer);
 
-        renderer_draw_texture(renderer, texture, states);
+        renderer_draw_sprite(renderer, sprite);
         renderer_set_draw_color(renderer, (Color){255, 0, 0, 255});
         renderer_fill_rect(renderer, (Rect){p.x, p.y, 10, 10});
 

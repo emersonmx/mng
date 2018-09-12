@@ -7,17 +7,6 @@
 #include <mng/window_impl.h>
 #include <mng/renderer_impl.h>
 
-DrawTextureParameters make_draw_texture_parameters()
-{
-    return (DrawTextureParameters){
-        (Rect){0, 0, 0, 0},
-        (Point){0, 0},
-        (Vector2){1.0f, 1.0f},
-        0.0f,
-        (Point){0, 0}
-    };
-}
-
 Renderer* renderer_new(Window* window)
 {
     ASSERT_VALID_OBJECT(window);
@@ -25,7 +14,7 @@ Renderer* renderer_new(Window* window)
     Renderer* renderer = malloc(sizeof(Renderer));
     RETURN_VALUE_IF_NULL(renderer, NULL);
 
-    renderer->handler = SDL_CreateRenderer(window->handler, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+    renderer->handler = SDL_CreateRenderer(window->handler, -1, SDL_RENDERER_ACCELERATED);
     RETURN_VALUE_IF_NULL(renderer->handler, NULL);
 
     renderer->clear_color = (Color){0, 0, 0, 255};
@@ -60,39 +49,39 @@ void renderer_fill_rect(Renderer* renderer, Rect rect)
     SDL_RenderFillRect(renderer->handler, &r);
 }
 
-void renderer_draw_texture(Renderer* renderer, Texture* texture, DrawTextureParameters parameters)
+void renderer_draw_sprite(Renderer* renderer, Sprite* sprite)
 {
     ASSERT_VALID_OBJECT(renderer);
-    RETURN_IF_NULL(texture);
-    RETURN_IF_NULL(texture->handler);
+    RETURN_IF_NULL(sprite);
+    RETURN_IF_NULL(sprite->texture);
 
-    double angle = parameters.rotation;
+    double angle = sprite->rotation;
     SDL_Point center = {
-        parameters.origin.x * fabsf(parameters.scale.x),
-        parameters.origin.y * fabsf(parameters.scale.y)
+        sprite->origin.x * fabsf(sprite->scale.x),
+        sprite->origin.y * fabsf(sprite->scale.y)
     };
 
     SDL_Rect srcrect = {
-        parameters.region.x, parameters.region.y,
-        parameters.region.width, parameters.region.height
+        sprite->region.x, sprite->region.y,
+        sprite->region.width, sprite->region.height
     };
     SDL_Rect dstrect = {
-        parameters.position.x - center.x,
-        parameters.position.y - center.y,
-        texture->size.width * fabsf(parameters.scale.x),
-        texture->size.height * fabsf(parameters.scale.y)
+        sprite->position.x - center.x,
+        sprite->position.y - center.y,
+        sprite->texture->size.width * fabsf(sprite->scale.x),
+        sprite->texture->size.height * fabsf(sprite->scale.y)
     };
 
     SDL_RendererFlip flip = SDL_FLIP_NONE;
-    if (parameters.scale.x < 0.0f) {
+    if (sprite->scale.x < 0.0f) {
         flip = flip | SDL_FLIP_HORIZONTAL;
     }
-    if (parameters.scale.y < 0.0f) {
+    if (sprite->scale.y < 0.0f) {
         flip = flip | SDL_FLIP_VERTICAL;
     }
 
     SDL_RenderCopyEx(
-        renderer->handler, texture->handler,
+        renderer->handler, sprite->texture->handler,
         &srcrect, &dstrect,
         angle, &center, flip
     );

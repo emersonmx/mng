@@ -1,23 +1,12 @@
 #ifndef MNG_RENDERER_H
 #define MNG_RENDERER_H
 
-#include <mng/vector2.h>
-#include <mng/texture.h>
+#include <mng/sprite.h>
 #include <mng/window.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-typedef struct DrawTextureParameters {
-    Rect region;
-    Point position;
-    Vector2 scale;
-    float rotation;
-    Point origin;
-} DrawTextureParameters;
-
-DrawTextureParameters make_draw_texture_parameters();
 
 typedef struct Renderer Renderer;
 
@@ -29,7 +18,7 @@ void renderer_set_draw_color(Renderer* renderer, Color color);
 
 void renderer_fill_rect(Renderer* renderer, Rect rect);
 
-void renderer_draw_texture(Renderer* renderer, Texture* texture, DrawTextureParameters parameters);
+void renderer_draw_sprite(Renderer* renderer, Sprite* sprite);
 
 void renderer_clear(Renderer* renderer);
 void renderer_present(Renderer* renderer);
