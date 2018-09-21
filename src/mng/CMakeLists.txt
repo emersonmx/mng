@@ -1,6 +1,7 @@
 add_library(mng
     types.c
     vector2.c
+    timer.c
     texture.c
     sprite.c
     resources.c
