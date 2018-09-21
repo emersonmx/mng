@@ -3,6 +3,7 @@
 
 #include <SDL.h>
 
+#include <mng/timer.h>
 #include <mng/vector2.h>
 #include <mng/window.h>
 #include <mng/renderer.h>
@@ -59,9 +60,9 @@ int main()
     Vector2 v = {1, 1};
     float speed = 200;
     float a_second = 0;
-    Uint64 now = SDL_GetPerformanceCounter();
-    Uint64 last_count = SDL_GetPerformanceCounter();
-    float delta = 1/60.f;
+    double last_count = timer_highres_get_ticks_in_seconds();
+
+    const double MS_PER_UPDATE = 1/60.0;
     Size s = texture_get_size(texture);
     sprite->region = (Rect){200, 200, s.width-200, s.height-200};
     sprite->scale = (Vector2){-0.6, 0.6};
@@ -69,11 +70,11 @@ int main()
     sprite->origin = (Point){s.width / 2.0f, s.height / 2.0f};
     while (running) {
         // start_loop
-        now = SDL_GetPerformanceCounter();
+        double now = timer_highres_get_ticks_in_seconds();
+        double delta = now - last_count;
+        last_count = now;
 
-        double deltaTime = (double)((now - last_count)*1000 / (double)SDL_GetPerformanceFrequency());
-        last_count = SDL_GetPerformanceCounter();
-        a_second += (deltaTime * 0.001);
+        a_second += delta;
 
         // process input
         while (SDL_PollEvent(&event)) {
@@ -83,12 +84,12 @@ int main()
         }
 
         // fixed update
-        if (a_second >= delta) {
-            p = vector2_add(p, vector2_multiply(vector2_normalized(v), speed * delta));
+        if (a_second >= MS_PER_UPDATE) {
+            p = vector2_add(p, vector2_multiply(vector2_normalized(v), speed * MS_PER_UPDATE));
 
-            sprite->rotation += delta * 50;
+            sprite->rotation += MS_PER_UPDATE * 50;
 
-            a_second -= delta;
+            a_second -= MS_PER_UPDATE;
         }
 
         // update
