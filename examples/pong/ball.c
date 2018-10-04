@@ -87,8 +87,6 @@ void ball_physics_update(Ball* ball, double delta)
         ball->speed = clamp(ball->speed, ball->min_speed, ball->max_speed);
     }
 
-    printf("Speed: %f\n", ball->speed);
-
     Vector2 nvel = vector2_normalized(ball->velocity);
     position = vector2_multiply(nvel, ball->speed * delta);
     ball->position = vector2_add(ball->position, position);
