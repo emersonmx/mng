@@ -2,6 +2,7 @@ add_executable(pong
     main.c
     app.c
     debugger.c
+    utils.c
     ball.c
 )
 
