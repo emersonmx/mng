@@ -14,6 +14,7 @@ typedef struct Ball {
     Size size;
     Vector2 velocity;
     float speed;
+    float speed_step;
     float min_speed;
     float max_speed;
     Rect bounds;

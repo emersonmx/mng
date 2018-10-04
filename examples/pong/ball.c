@@ -6,6 +6,8 @@
 
 #include <mng/macros.h>
 
+#include "utils.h"
+
 Ball* ball_new()
 {
     Ball* ball = malloc(sizeof(Ball));
@@ -13,6 +15,7 @@ Ball* ball_new()
 
     ball->size = (Size){6, 6};
     ball->speed = 100;
+    ball->speed_step = 10;
     ball->min_speed = 100;
     ball->max_speed = 1000;
 
@@ -43,6 +46,9 @@ Rect ball_get_rect(Ball* ball)
 void ball_reset(Ball* ball)
 {
     ASSERT_VALID_OBJECT(ball);
+
+    ball->speed = ball->min_speed;
+
     srand(time(NULL));
     float high = -M_PI/4;
     float low = M_PI/4;
@@ -61,8 +67,30 @@ void ball_ready(Ball* ball)
 void ball_physics_update(Ball* ball, double delta)
 {
     ASSERT_VALID_OBJECT(ball);
+
+    Vector2 position = ball->position;
+    Rect bounds = ball->bounds;
+    Size half_size = {ball->size.width / 2, ball->size.height / 2};
+
+    if (position.x - half_size.width < bounds.x
+        || position.x + half_size.width > bounds.width)
+    {
+        ball->velocity.x = -ball->velocity.x;
+        ball->speed += ball->speed_step;
+        ball->speed = clamp(ball->speed, ball->min_speed, ball->max_speed);
+    }
+    if (position.y - half_size.height < bounds.y
+        || position.y + half_size.height > bounds.height)
+    {
+        ball->velocity.y = -ball->velocity.y;
+        ball->speed += ball->speed_step;
+        ball->speed = clamp(ball->speed, ball->min_speed, ball->max_speed);
+    }
+
+    printf("Speed: %f\n", ball->speed);
+
     Vector2 nvel = vector2_normalized(ball->velocity);
-    Vector2 position = vector2_multiply(nvel, ball->speed * delta);
+    position = vector2_multiply(nvel, ball->speed * delta);
     ball->position = vector2_add(ball->position, position);
 }
 
