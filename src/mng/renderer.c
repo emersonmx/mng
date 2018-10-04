@@ -17,6 +17,8 @@ Renderer* renderer_new(Window* window)
     renderer->handler = SDL_CreateRenderer(window->handler, -1, SDL_RENDERER_ACCELERATED);
     RETURN_VALUE_IF_NULL(renderer->handler, NULL);
 
+    SDL_SetRenderDrawBlendMode(renderer->handler, SDL_BLENDMODE_BLEND);
+
     renderer->clear_color = (Color){0, 0, 0, 255};
 
     return renderer;
@@ -47,10 +49,13 @@ void renderer_draw_point(Renderer* renderer, Point point)
     SDL_RenderDrawPoint(renderer->handler, point.x, point.y);
 }
 
-void renderer_draw_line(Renderer* renderer, Point a, Point b)
+void renderer_draw_line(Renderer* renderer, Line line)
 {
     ASSERT_VALID_OBJECT(renderer);
-    SDL_RenderDrawLine(renderer->handler, a.x, a.y, b.x, b.y);
+    SDL_RenderDrawLine(renderer->handler,
+        line.start.x, line.start.y,
+        line.end.x, line.end.y
+    );
 }
 
 void renderer_fill_rect(Renderer* renderer, Rect rect)
