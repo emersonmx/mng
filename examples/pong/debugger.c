@@ -6,6 +6,7 @@
 
 struct Debugger {
     App* app;
+    Color guides_color;
 };
 
 Debugger* debugger_new(App* app)
@@ -16,6 +17,7 @@ Debugger* debugger_new(App* app)
     RETURN_VALUE_IF_NULL(debugger, NULL);
 
     debugger->app = app;
+    debugger->guides_color = (Color){255, 92, 92, 64};
 
     return debugger;
 }
@@ -34,4 +36,18 @@ void debugger_ready(Debugger* debugger)
 void debugger_render(Debugger* debugger, Renderer* renderer)
 {
     ASSERT_VALID_OBJECT(debugger);
+    renderer_set_draw_color(renderer, debugger->guides_color);
+
+    Size window_size = window_get_size(app_get_window(debugger->app));
+    int hcenter = window_size.width / 2.0f;
+    int vcenter = window_size.height / 2.0f;
+    Line vline = {
+        {hcenter, 0}, {hcenter, window_size.height}
+    };
+    Line hline = {
+        {0, vcenter}, {window_size.width, vcenter}
+    };
+
+    renderer_draw_line(renderer, vline);
+    renderer_draw_line(renderer, hline);
 }

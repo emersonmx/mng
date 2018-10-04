@@ -7,8 +7,6 @@
 
 #include <mng/macros.h>
 #include <mng/timer.h>
-#include <mng/window.h>
-#include <mng/renderer.h>
 
 #include "ball.h"
 #include "debugger.h"
@@ -27,7 +25,14 @@ struct App {
 
 void app_ready(App* app)
 {
+    Size window_size = window_get_size(app->window);
+
     app->ball = ball_new();
+    app->ball->bounds = (Rect){
+        0, 0,
+        window_size.width, window_size.height
+    };
+    app->ball->position = vector2_multiply(size_to_vector2(window_size), 0.5);
     ball_ready(app->ball);
 
     app->debugger = debugger_new(app);
@@ -43,12 +48,14 @@ void app_process_input(App* app, SDL_Event* event)
 
 void app_physics_process(App* app)
 {
-    ball_physics_update(app->ball);
+    double delta = app_get_physics_process_delta_time(app);
+    ball_physics_update(app->ball, delta);
 }
 
 void app_update(App* app)
 {
-    ball_update(app->ball);
+    double delta = app->delta;
+    ball_update(app->ball, delta);
 }
 
 void app_render(App* app)
@@ -79,6 +86,12 @@ void app_free(App* app)
     free(app);
 }
 
+Window* app_get_window(App* app)
+{
+    ASSERT_VALID_OBJECT(app);
+    return app->window;
+}
+
 int app_get_physics_fps(App* app)
 {
     ASSERT_VALID_OBJECT(app);
@@ -90,6 +103,12 @@ void app_set_physics_fps(App* app, int fps)
     ASSERT_VALID_OBJECT(app);
     app->ms_per_update = 1.0 / fps;
     app->physics_fps = fps;
+}
+
+double app_get_physics_process_delta_time(App* app)
+{
+    ASSERT_VALID_OBJECT(app);
+    return app->ms_per_update;
 }
 
 void app_initialize(App* app)
