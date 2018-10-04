@@ -4,6 +4,8 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#include <mng/vector2.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -12,6 +14,11 @@ typedef struct Point {
     int x;
     int y;
 } Point;
+
+typedef struct Line {
+    Point start;
+    Point end;
+} Line;
 
 typedef struct Color {
     uint8_t red;
@@ -24,6 +31,8 @@ typedef struct Size {
     int width;
     int height;
 } Size;
+
+Vector2 size_to_vector2(Size size);
 
 typedef struct Rect {
     int x;
