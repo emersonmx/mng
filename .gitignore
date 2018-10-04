@@ -1,4 +1,4 @@
 /build/
 /.tags
-/.projections.json
 /compile_commands.json
+.projections.json
