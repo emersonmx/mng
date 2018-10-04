@@ -12,6 +12,8 @@ typedef struct Window Window;
 Window* window_new(const char* title, Size size);
 void window_free(Window* window);
 
+Size window_get_size(Window* window);
+
 #ifdef __cplusplus
 }
 #endif

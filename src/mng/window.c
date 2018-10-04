@@ -23,3 +23,12 @@ void window_free(Window* window)
     SDL_DestroyWindow(window->handler);
     free(window);
 }
+
+Size window_get_size(Window* window)
+{
+    ASSERT_VALID_OBJECT(window);
+
+    Size size;
+    SDL_GetWindowSize(window->handler, &size.width, &size.height);
+    return size;
+}
