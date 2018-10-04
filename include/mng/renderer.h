@@ -16,6 +16,8 @@ void renderer_free(Renderer* renderer);
 void renderer_set_clear_color(Renderer* renderer, Color color);
 void renderer_set_draw_color(Renderer* renderer, Color color);
 
+void renderer_draw_point(Renderer* renderer, Point point);
+void renderer_draw_line(Renderer* renderer, Point a, Point b);
 void renderer_fill_rect(Renderer* renderer, Rect rect);
 
 void renderer_draw_sprite(Renderer* renderer, Sprite* sprite);
