@@ -17,6 +17,8 @@ float vector2_length(Vector2 a);
 float vector2_length_squared(Vector2 a);
 Vector2 vector2_normalized(Vector2 a);
 float vector2_dot(Vector2 a, Vector2 b);
+Vector2 vector2_rotated(Vector2 a, float rad);
+float vector2_angle(Vector2 a);
 
 #ifdef __cplusplus
 }
