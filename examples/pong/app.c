@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdbool.h>
+#include <time.h>
 
 #include <SDL.h>
 
@@ -25,6 +26,7 @@ struct App {
 
 void app_ready(App* app)
 {
+    srand(time(NULL));
     Size window_size = window_get_size(app->window);
 
     app->ball = ball_new();

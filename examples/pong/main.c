@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include <time.h>
 
 #include "app.h"
 
@@ -13,8 +12,6 @@ void Finalize()
 
 int main()
 {
-    srand(time(NULL));
-
     app = app_new();
 
     atexit(Finalize);
