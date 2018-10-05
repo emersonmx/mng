@@ -1,5 +1,7 @@
 add_library(mng
     types.c
+    math.c
+    random.c
     vector2.c
     timer.c
     texture.c

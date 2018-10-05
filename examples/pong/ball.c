@@ -5,8 +5,8 @@
 #include <stdlib.h>
 
 #include <mng/macros.h>
-
-#include "utils.h"
+#include <mng/math.h>
+#include <mng/random.h>
 
 Ball* ball_new()
 {
@@ -48,12 +48,7 @@ void ball_reset(Ball* ball)
     ASSERT_VALID_OBJECT(ball);
 
     ball->speed = ball->min_speed;
-
-    srand(time(NULL));
-    float high = -M_PI/4;
-    float low = M_PI/4;
-    float range = high - low;
-    float direction = (rand() / (float) RAND_MAX) * range + low;
+    float direction = rand_range(-M_PI/4, M_PI/4);
     ball->velocity = vector2_rotated((Vector2){1, 0}, direction);
     ball->velocity.x *= rand() % 2 == 0 ? -1 : 1;
 }
@@ -77,14 +72,14 @@ void ball_physics_update(Ball* ball, double delta)
     {
         ball->velocity.x = -ball->velocity.x;
         ball->speed += ball->speed_step;
-        ball->speed = clamp(ball->speed, ball->min_speed, ball->max_speed);
+        ball->speed = math_fclamp(ball->speed, ball->min_speed, ball->max_speed);
     }
     if (position.y - half_size.height < bounds.y
         || position.y + half_size.height > bounds.height)
     {
         ball->velocity.y = -ball->velocity.y;
         ball->speed += ball->speed_step;
-        ball->speed = clamp(ball->speed, ball->min_speed, ball->max_speed);
+        ball->speed = math_fclamp(ball->speed, ball->min_speed, ball->max_speed);
     }
 
     Vector2 nvel = vector2_normalized(ball->velocity);
