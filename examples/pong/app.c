@@ -69,6 +69,39 @@ void app_render(App* app)
     renderer_present(app->renderer);
 }
 
+void _app_initialize(App* app)
+{
+    if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
+        SDL_Log("Couldn't start SDL.\n\tError: ", SDL_GetError());
+        return;
+    }
+
+    app->window = window_new("Pong", (Size){640, 480});
+    if (app->window == NULL) {
+        SDL_Log("Couldn't create window.\n\tError: ", SDL_GetError());
+        return;
+    }
+
+    app->renderer = renderer_new(app->window);
+    if (app->renderer == NULL) {
+        SDL_Log("Couldn't create renderer.\n\tError: ", SDL_GetError());
+        return;
+    }
+
+    app_ready(app);
+}
+
+void _app_finalize(App* app)
+{
+    debugger_free(app->debugger);
+    ball_free(app->ball);
+
+    renderer_free(app->renderer);
+    window_free(app->window);
+
+    SDL_Quit();
+}
+
 App* app_new()
 {
     App* app = malloc(sizeof(App));
@@ -113,33 +146,11 @@ double app_get_physics_process_delta_time(App* app)
     return app->ms_per_update;
 }
 
-void app_initialize(App* app)
-{
-    ASSERT_VALID_OBJECT(app);
-
-    if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-        SDL_Log("Couldn't start SDL.\n\tError: ", SDL_GetError());
-        return;
-    }
-
-    app->window = window_new("Pong", (Size){640, 480});
-    if (app->window == NULL) {
-        SDL_Log("Couldn't create window.\n\tError: ", SDL_GetError());
-        return;
-    }
-
-    app->renderer = renderer_new(app->window);
-    if (app->renderer == NULL) {
-        SDL_Log("Couldn't create renderer.\n\tError: ", SDL_GetError());
-        return;
-    }
-
-    app_ready(app);
-}
-
 void app_run(App* app)
 {
     ASSERT_VALID_OBJECT(app);
+
+    _app_initialize(app);
 
     double a_second = 0.0;
     double last_count = timer_highres_get_ticks_in_seconds();
@@ -166,19 +177,8 @@ void app_run(App* app)
 
         app_render(app);
     }
-}
 
-void app_finalize(App* app)
-{
-    ASSERT_VALID_OBJECT(app);
-
-    debugger_free(app->debugger);
-    ball_free(app->ball);
-
-    renderer_free(app->renderer);
-    window_free(app->window);
-
-    SDL_Quit();
+    _app_finalize(app);
 }
 
 void app_quit(App* app)

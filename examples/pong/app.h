@@ -19,9 +19,7 @@ int app_get_physics_fps(App* app);
 void app_set_physics_fps(App* app, int fps);
 double app_get_physics_process_delta_time(App* app);
 
-void app_initialize(App* app);
 void app_run(App* app);
-void app_finalize(App* app);
 void app_quit(App* app);
 
 #ifdef __cplusplus
