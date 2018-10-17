@@ -3,7 +3,7 @@
 #include <mng/macros.h>
 #include <mng/texture_impl.h>
 
-Texture* texture_new()
+Texture* texture_new(void)
 {
     Texture* texture = malloc(sizeof(Texture));
     RETURN_VALUE_IF_NULL(texture, NULL);

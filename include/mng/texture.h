@@ -10,7 +10,7 @@ extern "C" {
 typedef struct Texture Texture;
 
 
-Texture* texture_new();
+Texture* texture_new(void);
 void texture_free(Texture* texture);
 
 Size texture_get_size(Texture* texture);

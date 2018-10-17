@@ -40,9 +40,7 @@ float vector2_dot(Vector2 a, Vector2 b)
 Vector2 vector2_rotated(Vector2 a, float rad)
 {
     float angle = vector2_angle(a) + rad;
-    Vector2 v = {
-        cos(angle), sin(angle)
-    };
+    Vector2 v = { cos(angle), sin(angle) };
     return vector2_multiply(v, vector2_length(v));
 }
 

@@ -20,7 +20,7 @@ typedef struct Ball {
     Rect bounds;
 } Ball;
 
-Ball* ball_new();
+Ball* ball_new(void);
 void ball_free(Ball* ball);
 
 Rect ball_get_rect(Ball* ball);

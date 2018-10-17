@@ -4,7 +4,7 @@
 
 #include <mng/macros.h>
 
-Sprite* sprite_new()
+Sprite* sprite_new(void)
 {
     Sprite* sprite = malloc(sizeof(Sprite));
     RETURN_VALUE_IF_NULL(sprite, NULL);

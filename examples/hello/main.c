@@ -16,22 +16,22 @@ Renderer* renderer = NULL;
 Texture* texture = NULL;
 Sprite* sprite = NULL;
 
-void Initialize()
+void Initialize(void)
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-        SDL_Log("Couldn't start SDL.\n\tError: ", SDL_GetError());
+        SDL_Log("Couldn't start SDL.\n\tError: %s", SDL_GetError());
         return;
     }
 
     window = window_new("Hello world", (Size){800, 600});
     if (window == NULL) {
-        SDL_Log("Couldn't create window.\n\tError: ", SDL_GetError());
+        SDL_Log("Couldn't create window.\n\tError: %s", SDL_GetError());
         return;
     }
 
     renderer = renderer_new(window);
     if (renderer == NULL) {
-        SDL_Log("Couldn't create renderer.\n\tError: ", SDL_GetError());
+        SDL_Log("Couldn't create renderer.\n\tError: %s", SDL_GetError());
         return;
     }
 
@@ -40,7 +40,7 @@ void Initialize()
     sprite->texture = texture;
 }
 
-void Finalize()
+void Finalize(void)
 {
     sprite_free(sprite);
     texture_free(texture);
@@ -51,7 +51,7 @@ void Finalize()
     SDL_Quit();
 }
 
-int main()
+int main(int argc, char* argv[])
 {
     atexit(Finalize);
     Initialize();

@@ -7,11 +7,11 @@
 extern "C" {
 #endif
 
-uint32_t timer_get_ticks_in_milliseconds();
-double timer_get_ticks_in_seconds();
+uint32_t timer_get_ticks_in_milliseconds(void);
+double timer_get_ticks_in_seconds(void);
 
-uint32_t timer_highres_get_ticks_in_milliseconds();
-double timer_highres_get_ticks_in_seconds();
+uint32_t timer_highres_get_ticks_in_milliseconds(void);
+double timer_highres_get_ticks_in_seconds(void);
 
 #ifdef __cplusplus
 }

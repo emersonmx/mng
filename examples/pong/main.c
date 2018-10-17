@@ -2,7 +2,7 @@
 
 #include "app.h"
 
-int main()
+int main(int argc, char* argv[])
 {
     App* app = app_new();
     app_run(app);

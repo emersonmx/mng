@@ -72,19 +72,19 @@ void app_render(App* app)
 void _app_initialize(App* app)
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-        SDL_Log("Couldn't start SDL.\n\tError: ", SDL_GetError());
+        SDL_Log("Couldn't start SDL.\n\tError: %s", SDL_GetError());
         return;
     }
 
     app->window = window_new("Pong", (Size){640, 480});
     if (app->window == NULL) {
-        SDL_Log("Couldn't create window.\n\tError: ", SDL_GetError());
+        SDL_Log("Couldn't create window.\n\tError: %s", SDL_GetError());
         return;
     }
 
     app->renderer = renderer_new(app->window);
     if (app->renderer == NULL) {
-        SDL_Log("Couldn't create renderer.\n\tError: ", SDL_GetError());
+        SDL_Log("Couldn't create renderer.\n\tError: %s", SDL_GetError());
         return;
     }
 
@@ -102,7 +102,7 @@ void _app_finalize(App* app)
     SDL_Quit();
 }
 
-App* app_new()
+App* app_new(void)
 {
     App* app = malloc(sizeof(App));
     RETURN_VALUE_IF_NULL(app, NULL);

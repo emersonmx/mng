@@ -8,7 +8,7 @@
 #include <mng/math.h>
 #include <mng/random.h>
 
-Ball* ball_new()
+Ball* ball_new(void)
 {
     Ball* ball = malloc(sizeof(Ball));
     RETURN_VALUE_IF_NULL(ball, NULL);

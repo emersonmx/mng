@@ -11,7 +11,8 @@ extern "C" {
 
 typedef struct App App;
 
-App* app_new();
+
+App* app_new(void);
 void app_free(App* app);
 
 Window* app_get_window(App* app);

@@ -19,7 +19,7 @@ typedef struct Sprite {
 } Sprite;
 
 
-Sprite* sprite_new();
+Sprite* sprite_new(void);
 void sprite_free(Sprite* sprite);
 
 #ifdef __cplusplus
