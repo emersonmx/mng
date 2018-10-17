@@ -33,8 +33,8 @@ Rect ball_get_rect(Ball* ball)
     ASSERT_VALID_OBJECT(ball);
 
     Point point = {
-        ball->position.x - ball->size.width / 2.0f,
-        ball->position.y - ball->size.height / 2.0f,
+        ball->position.x - ball->size.width / 2.0,
+        ball->position.y - ball->size.height / 2.0,
     };
 
     return (Rect){
@@ -48,7 +48,7 @@ void ball_reset(Ball* ball)
     ASSERT_VALID_OBJECT(ball);
 
     ball->speed = ball->min_speed;
-    float direction = rand_range(-M_PI/4, M_PI/4);
+    double direction = rand_range(-M_PI/4, M_PI/4);
     ball->velocity = vector2_rotated((Vector2){1, 0}, direction);
     ball->velocity.x *= rand() % 2 == 0 ? -1 : 1;
 }

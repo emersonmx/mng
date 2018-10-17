@@ -89,10 +89,10 @@ void renderer_draw_sprite(Renderer* renderer, Sprite* sprite)
     };
 
     SDL_RendererFlip flip = SDL_FLIP_NONE;
-    if (sprite->scale.x < 0.0f) {
+    if (sprite->scale.x < 0.0) {
         flip = flip | SDL_FLIP_HORIZONTAL;
     }
-    if (sprite->scale.y < 0.0f) {
+    if (sprite->scale.y < 0.0) {
         flip = flip | SDL_FLIP_VERTICAL;
     }
 

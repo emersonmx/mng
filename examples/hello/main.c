@@ -58,16 +58,16 @@ int main(int argc, char* argv[])
 
     Vector2 p = {0, 0};
     Vector2 v = {1, 1};
-    float speed = 200;
-    float a_second = 0;
+    double speed = 200;
+    double a_second = 0;
     double last_count = timer_highres_get_ticks_in_seconds();
 
     const double MS_PER_UPDATE = 1/60.0;
     Size s = texture_get_size(texture);
     sprite->region = (Rect){200, 200, s.width-200, s.height-200};
     sprite->scale = (Vector2){-0.6, 0.6};
-    sprite->position = (Point){s.width / 2.0f, s.height / 2.0f};
-    sprite->origin = (Point){s.width / 2.0f, s.height / 2.0f};
+    sprite->position = (Point){s.width / 2.0, s.height / 2.0};
+    sprite->origin = (Point){s.width / 2.0, s.height / 2.0};
     while (running) {
         // start_loop
         double now = timer_highres_get_ticks_in_seconds();

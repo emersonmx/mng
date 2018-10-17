@@ -12,7 +12,7 @@ Sprite* sprite_new(void)
     sprite->texture = NULL;
     sprite->region = (Rect){0, 0, 0, 0};
     sprite->position = (Point){0, 0};
-    sprite->scale = (Vector2){1.0f, 1.0f};
+    sprite->scale = (Vector2){1.0, 1.0};
     sprite->rotation = 0.0;
     sprite->origin = (Point){0, 0};
 
