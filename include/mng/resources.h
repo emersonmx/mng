@@ -1,6 +1,7 @@
 #ifndef MNG_RESOURCES_H
 #define MNG_RESOURCES_H
 
+#include <mng/texture.h>
 #include <mng/renderer.h>
 
 #ifdef __cplusplus
