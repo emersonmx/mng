@@ -9,6 +9,7 @@ extern "C" {
 
 typedef struct Texture Texture;
 
+
 Texture* texture_new();
 void texture_free(Texture* texture);
 

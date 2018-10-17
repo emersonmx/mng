@@ -13,7 +13,7 @@ Sprite* sprite_new()
     sprite->region = (Rect){0, 0, 0, 0};
     sprite->position = (Point){0, 0};
     sprite->scale = (Vector2){1.0f, 1.0f};
-    sprite->rotation = 0.0f;
+    sprite->rotation = 0.0;
     sprite->origin = (Point){0, 0};
 
     return sprite;

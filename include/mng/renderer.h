@@ -1,6 +1,7 @@
 #ifndef MNG_RENDERER_H
 #define MNG_RENDERER_H
 
+#include <mng/types.h>
 #include <mng/sprite.h>
 #include <mng/window.h>
 
@@ -9,6 +10,7 @@ extern "C" {
 #endif
 
 typedef struct Renderer Renderer;
+
 
 Renderer* renderer_new(Window* window);
 void renderer_free(Renderer* renderer);

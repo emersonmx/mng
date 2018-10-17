@@ -32,6 +32,7 @@ typedef struct Size {
     int height;
 } Size;
 
+
 Vector2 size_to_vector2(Size size);
 
 typedef struct Rect {
@@ -40,6 +41,7 @@ typedef struct Rect {
     int width;
     int height;
 } Rect;
+
 
 bool rect_is_empty(Rect rect);
 

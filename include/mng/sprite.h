@@ -2,6 +2,7 @@
 #define MNG_SPRITE_H
 
 #include <mng/vector2.h>
+#include <mng/types.h>
 #include <mng/texture.h>
 
 #ifdef __cplusplus
@@ -13,9 +14,10 @@ typedef struct Sprite {
     Rect region;
     Point position;
     Vector2 scale;
-    float rotation;
+    double rotation;
     Point origin;
 } Sprite;
+
 
 Sprite* sprite_new();
 void sprite_free(Sprite* sprite);
