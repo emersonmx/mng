@@ -1,0 +1,16 @@
+Import('env')
+env = env.Clone(
+    LIBPATH=['#/build/src/mng'],
+    LIBS='mng'
+)
+
+dirs = [
+    'hello', 'pong'
+]
+
+for subdir in dirs:
+    SConscript(
+        dirs=subdir,
+        exports=['env'],
+        duplicate=0
+    )

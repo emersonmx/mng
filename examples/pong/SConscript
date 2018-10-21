@@ -1,0 +1,18 @@
+Import('env')
+env = env.Clone()
+env.ParseConfig('pkg-config sdl2 --cflags --libs')
+
+conf = Configure(env)
+if not conf.CheckLib('m'):
+    print('Did not find libm.a or m.lib, exiting!')
+    Exit(1)
+env = conf.Finish()
+
+pong = env.Program('pong', [
+        'main.c',
+        'app.c',
+        'debugger.c',
+        'ball.c',
+    ]
+)
+env.Depends(pong, env.Alias('mng'))

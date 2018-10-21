@@ -1,4 +1,7 @@
 /build/
 /.tags
 /compile_commands.json
+/.sconsign.dblite
+/.sconf_temp
+/config.log
 .projections.json

@@ -1,0 +1,8 @@
+Import('env')
+env = env.Clone()
+
+SConscript(
+    dirs='mng',
+    exports=['env'],
+    duplicate=0
+)

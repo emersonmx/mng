@@ -1,0 +1,5 @@
+Import('env')
+env.ParseConfig('pkg-config sdl2 --cflags --libs')
+
+hello = env.Program('hello', 'main.c')
+env.Depends(hello, env.Alias('mng'))
