@@ -1,7 +1,6 @@
 #include <mng/math.h>
 
 #include <stdlib.h>
-#include <math.h>
 
 double math_fclamp(double value, double min_value, double max_value)
 {
