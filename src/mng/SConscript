@@ -15,4 +15,6 @@ env.SharedLibrary('mng', [
     'resources.c',
     'window.c',
     'renderer.c',
+    'game.c',
+    'engine.c',
 ])
