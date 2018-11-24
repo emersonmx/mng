@@ -8,7 +8,7 @@ void game_default_quit(void)
 {
 }
 
-void game_default_input(InputEvent* input)
+void game_default_input(const InputEvent* input)
 {
 }
 

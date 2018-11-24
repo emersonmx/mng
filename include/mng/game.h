@@ -9,7 +9,7 @@ extern "C" {
 
 typedef void (*GameInitFunc)(void);
 typedef void (*GameQuitFunc)(void);
-typedef void (*GameInputFunc)(InputEvent* input);
+typedef void (*GameInputFunc)(const InputEvent* input);
 typedef void (*GameFixedUpdateFunc)(double delta);
 typedef void (*GameUpdateFunc)(double delta);
 typedef void (*GameRenderFunc)(void);
@@ -26,7 +26,7 @@ typedef struct Game {
 
 void game_default_init(void);
 void game_default_quit(void);
-void game_default_input(InputEvent* input);
+void game_default_input(const InputEvent* input);
 void game_default_fixed_update(double delta);
 void game_default_update(double delta);
 void game_default_render(void);
