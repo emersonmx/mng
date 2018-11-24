@@ -1,5 +1,5 @@
-#ifndef MNG_LINE_H
-#define MNG_LINE_H
+#ifndef MNG_LINE2_H
+#define MNG_LINE2_H
 
 #include <mng/point2.h>
 
@@ -7,13 +7,13 @@
 extern "C" {
 #endif
 
-typedef struct Line {
+typedef struct Line2 {
     Point2 start;
     Point2 end;
-} Line;
+} Line2;
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* MNG_LINE_H */
+#endif /* MNG_LINE2_H */

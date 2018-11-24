@@ -2,7 +2,7 @@
 #define EXAMPLES_PONG_APP_H
 
 #include <mng/color.h>
-#include <mng/line.h>
+#include <mng/line2.h>
 #include <mng/point2.h>
 #include <mng/rect.h>
 #include <mng/size.h>

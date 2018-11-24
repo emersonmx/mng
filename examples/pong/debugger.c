@@ -41,13 +41,13 @@ void debugger_render(Debugger* debugger, Renderer* renderer)
     Size window_size = window_get_size(app_get_window(debugger->app));
     int hcenter = window_size.width / 2.0;
     int vcenter = window_size.height / 2.0;
-    Line vline = {
+    Line2 vline = {
         {hcenter, 0}, {hcenter, window_size.height}
     };
-    Line hline = {
+    Line2 hline = {
         {0, vcenter}, {window_size.width, vcenter}
     };
 
-    renderer_draw_line(renderer, vline);
-    renderer_draw_line(renderer, hline);
+    renderer_draw_line2(renderer, vline);
+    renderer_draw_line2(renderer, hline);
 }

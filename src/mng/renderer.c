@@ -49,7 +49,7 @@ void renderer_draw_point2(Renderer* renderer, Point2 point)
     SDL_RenderDrawPoint(renderer->handler, point.x, point.y);
 }
 
-void renderer_draw_line(Renderer* renderer, Line line)
+void renderer_draw_line2(Renderer* renderer, Line2 line)
 {
     ASSERT_VALID_OBJECT(renderer);
     SDL_RenderDrawLine(renderer->handler,
