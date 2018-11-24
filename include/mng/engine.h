@@ -7,6 +7,11 @@
 extern "C" {
 #endif
 
+typedef struct EngineSettings {
+    int wip;
+} EngineSettings;
+
+void engine_load_settings(EngineSettings* settings);
 void engine_run(Game game);
 
 #ifdef __cplusplus
