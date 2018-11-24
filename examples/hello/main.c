@@ -29,6 +29,11 @@ void Initialize(void)
         return;
     }
 
+    window_set_title(window, "Hello world");
+    printf("Title \"%s\"\n", window_get_title(window));
+    Size size = window_get_size(window);
+    printf("Size %dx%d\n", size.width, size.height);
+
     renderer = renderer_new(window);
     if (renderer == NULL) {
         SDL_Log("Couldn't create renderer.\n\tError: %s", SDL_GetError());

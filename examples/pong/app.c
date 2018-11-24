@@ -82,6 +82,12 @@ void _app_initialize(App* app)
         return;
     }
 
+    window_set_title(app->window, "Pong");
+    printf("Title \"%s\"\n", window_get_title(app->window));
+    window_set_size(app->window, (Size){640, 480});
+    Size size = window_get_size(app->window);
+    printf("Size %dx%d\n", size.width, size.height);
+
     app->renderer = renderer_new(app->window);
     if (app->renderer == NULL) {
         SDL_Log("Couldn't create renderer.\n\tError: %s", SDL_GetError());

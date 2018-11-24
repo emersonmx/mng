@@ -24,6 +24,40 @@ void window_free(Window* window)
     free(window);
 }
 
+const char* window_get_title(Window* window)
+{
+    ASSERT_VALID_OBJECT(window);
+    return SDL_GetWindowTitle(window->handler);
+}
+
+void window_set_title(Window* window, const char* title)
+{
+    ASSERT_VALID_OBJECT(window);
+    SDL_SetWindowTitle(window->handler, title);
+}
+
+Point2 window_get_position(Window* window)
+{
+    ASSERT_VALID_OBJECT(window);
+    Point2 position;
+    SDL_GetWindowPosition(window->handler, &position.x, &position.y);
+    return position;
+}
+
+void window_set_position(Window* window, const Point2 position)
+{
+    ASSERT_VALID_OBJECT(window);
+    SDL_SetWindowPosition(window->handler, position.x, position.y);
+}
+
+void window_center_position(Window* window)
+{
+    window_set_position(window, (Point2){
+        SDL_WINDOWPOS_CENTERED,
+        SDL_WINDOWPOS_CENTERED
+    });
+}
+
 Size window_get_size(Window* window)
 {
     ASSERT_VALID_OBJECT(window);
@@ -31,4 +65,10 @@ Size window_get_size(Window* window)
     Size size;
     SDL_GetWindowSize(window->handler, &size.width, &size.height);
     return size;
+}
+
+void window_set_size(Window* window, const Size size)
+{
+    ASSERT_VALID_OBJECT(window);
+    SDL_SetWindowSize(window->handler, size.width, size.height);
 }
