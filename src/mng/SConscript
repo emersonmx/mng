@@ -6,6 +6,7 @@ env.ParseConfig('pkg-config SDL2_image --cflags --libs')
 
 env.SharedLibrary('mng', [
     'types.c',
+    'point.c',
     'math.c',
     'random.c',
     'vector2.c',

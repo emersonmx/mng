@@ -5,15 +5,11 @@
 #include <stdint.h>
 
 #include <mng/vector2.h>
+#include <mng/point.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-typedef struct Point {
-    int x;
-    int y;
-} Point;
 
 typedef struct Line {
     Point start;
