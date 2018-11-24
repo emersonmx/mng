@@ -8,7 +8,6 @@ extern "C" {
 #endif
 
 void engine_run(Game game);
-void engine_quit(void);
 
 #ifdef __cplusplus
 }
