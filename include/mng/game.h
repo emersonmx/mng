@@ -31,6 +31,8 @@ void game_default_fixed_update(double delta);
 void game_default_update(double delta);
 void game_default_render(void);
 
+Game make_game_with_defaults(Game game);
+
 #ifdef __cplusplus
 }
 #endif
