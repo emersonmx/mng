@@ -1,6 +1,8 @@
 #ifndef MNG_LINE_H
 #define MNG_LINE_H
 
+#include <mng/point.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
