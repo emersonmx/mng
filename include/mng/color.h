@@ -1,6 +1,8 @@
 #ifndef MNG_COLOR_H
 #define MNG_COLOR_H
 
+#include <stdint.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
