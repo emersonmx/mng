@@ -17,7 +17,7 @@ Debugger* debugger_new(App* app)
     RETURN_VALUE_IF_NULL(debugger, NULL);
 
     debugger->app = app;
-    debugger->guides_color = (Color){255, 92, 92, 64};
+    debugger->guides_color = (Color){1.0f, 0.36f, 0.36f, 0.25f};
 
     return debugger;
 }

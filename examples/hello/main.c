@@ -117,7 +117,7 @@ int main(int argc, char* argv[])
         renderer_clear(renderer);
 
         renderer_draw_sprite(renderer, sprite);
-        renderer_set_draw_color(renderer, (Color){255, 0, 0, 255});
+        renderer_set_draw_color(renderer, (Color){1.0f, 0.0f, 0.0f, 1.0f});
         renderer_fill_rect(renderer, (Rect){p.x, p.y, 10, 10});
 
         renderer_present(renderer);

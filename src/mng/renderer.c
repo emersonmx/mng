@@ -19,7 +19,7 @@ Renderer* renderer_new(Window* window)
 
     SDL_SetRenderDrawBlendMode(renderer->handler, SDL_BLENDMODE_BLEND);
 
-    renderer->clear_color = (Color){0, 0, 0, 255};
+    renderer->clear_color = (Color){0.0f, 0.0f, 0.0f, 1.0f};
 
     return renderer;
 }
@@ -40,7 +40,11 @@ void renderer_set_clear_color(Renderer* renderer, Color color)
 void renderer_set_draw_color(Renderer* renderer, Color color)
 {
     ASSERT_VALID_OBJECT(renderer);
-    SDL_SetRenderDrawColor(renderer->handler, color.red, color.green, color.blue, color.alpha);
+    int red = color.red * 255;
+    int green = color.green * 255;
+    int blue = color.blue * 255;
+    int alpha = color.alpha * 255;
+    SDL_SetRenderDrawColor(renderer->handler, red, green, blue, alpha);
 }
 
 void renderer_draw_point2(Renderer* renderer, Point2 point)

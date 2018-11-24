@@ -96,6 +96,6 @@ void ball_render(Ball* ball, Renderer* renderer)
 {
     ASSERT_VALID_OBJECT(ball);
 
-    renderer_set_draw_color(renderer, (Color){255, 255, 255, 255});
+    renderer_set_draw_color(renderer, (Color){1.0f, 1.0f, 1.0f, 1.0f});
     renderer_fill_rect(renderer, ball_get_rect(ball));
 }
