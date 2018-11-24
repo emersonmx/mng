@@ -1,7 +1,11 @@
 #ifndef EXAMPLES_PONG_APP_H
 #define EXAMPLES_PONG_APP_H
 
-#include <mng/types.h>
+#include <mng/color.h>
+#include <mng/line.h>
+#include <mng/point.h>
+#include <mng/rect.h>
+#include <mng/size.h>
 #include <mng/window.h>
 #include <mng/renderer.h>
 

@@ -3,7 +3,7 @@
 
 #include <SDL_render.h>
 
-#include <mng/types.h>
+#include <mng/size.h>
 
 struct Texture {
     SDL_Texture* handler;

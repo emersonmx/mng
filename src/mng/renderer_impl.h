@@ -3,7 +3,7 @@
 
 #include <SDL_render.h>
 
-#include <mng/types.h>
+#include <mng/color.h>
 
 struct Renderer {
     SDL_Renderer* handler;

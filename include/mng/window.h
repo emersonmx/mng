@@ -1,7 +1,7 @@
 #ifndef MNG_WINDOW_H
 #define MNG_WINDOW_H
 
-#include <mng/types.h>
+#include <mng/size.h>
 
 #ifdef __cplusplus
 extern "C" {

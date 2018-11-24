@@ -1,7 +1,10 @@
 #ifndef MNG_RENDERER_H
 #define MNG_RENDERER_H
 
-#include <mng/types.h>
+#include <mng/color.h>
+#include <mng/line.h>
+#include <mng/point.h>
+#include <mng/rect.h>
 #include <mng/sprite.h>
 #include <mng/window.h>
 
