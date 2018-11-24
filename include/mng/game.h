@@ -23,6 +23,7 @@ typedef struct Game {
     RenderFunc render;
 } Game;
 
+
 void default_init_func(void);
 void default_quit_func(void);
 void default_input_func(InputEvent* input);
