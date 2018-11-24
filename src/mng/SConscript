@@ -6,6 +6,7 @@ env.ParseConfig('pkg-config SDL2_image --cflags --libs')
 
 env.SharedLibrary('mng', [
     'engine.c',
+    'engine_core.c',
     'game.c',
     'math.c',
     'point2.c',

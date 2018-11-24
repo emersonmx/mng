@@ -5,7 +5,7 @@ env = env.Clone(
 )
 
 dirs = [
-    'hello', 'pong'
+    'hello', 'hello_engine', 'pong'
 ]
 
 for subdir in dirs:

@@ -16,8 +16,8 @@ typedef struct WindowSettings {
     Point2 position;
     bool centered;
     Size size;
-    bool fullscreen;
     bool resizable;
+    bool fullscreen;
 } WindowSettings;
 
 typedef struct EngineSettings {
