@@ -8,16 +8,16 @@
 #include <mng/window.h>
 #include <mng/renderer.h>
 
-typedef struct EngineContext {
+typedef struct Engine {
     bool running;
     double update_delta;
     double fixed_update_delta;
     EngineSettings settings;
     Window* window;
     Renderer* renderer;
-} EngineContext;
+} Engine;
 
-static EngineContext engine = {
+static Engine engine = {
     .running = true,
     .update_delta = 0.0
 };
