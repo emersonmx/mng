@@ -12,7 +12,7 @@ typedef struct EngineContext {
     bool running;
     double update_delta;
     double fixed_update_delta;
-    EngineSettings* settings;
+    EngineSettings settings;
     Window* window;
     Renderer* renderer;
 } EngineContext;
@@ -60,7 +60,7 @@ void engine_finalize(void)
     SDL_Quit();
 }
 
-void engine_load_settings(EngineSettings* settings)
+void engine_load_settings(EngineSettings settings)
 {
     engine.settings = settings;
 }
