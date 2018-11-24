@@ -1,17 +1,30 @@
 #ifndef MNG_ENGINE_H
 #define MNG_ENGINE_H
 
+#include <stdbool.h>
+
+#include <mng/point2.h>
+#include <mng/size.h>
 #include <mng/game.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+typedef struct WindowSettings {
+    const char* title;
+    Point2 position;
+    bool centered;
+    Size size;
+    bool fullscreen;
+    bool resizable;
+} WindowSettings;
+
 typedef struct EngineSettings {
-    int wip;
+    WindowSettings window;
 } EngineSettings;
 
-void engine_load_settings(EngineSettings settings);
+void engine_set_settings(EngineSettings settings);
 void engine_run(Game game);
 
 #ifdef __cplusplus

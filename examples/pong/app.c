@@ -76,7 +76,7 @@ void _app_initialize(App* app)
         return;
     }
 
-    app->window = window_new("Pong", (Size){640, 480});
+    app->window = window_new();
     if (app->window == NULL) {
         SDL_Log("Couldn't create window.\n\tError: %s", SDL_GetError());
         return;

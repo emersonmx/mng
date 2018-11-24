@@ -35,7 +35,7 @@ void engine_initialize(void)
         return;
     }
 
-    engine.window = window_new("Pong", (Size){640, 480});
+    engine.window = window_new();
     if (engine.window == NULL) {
         SDL_Log("Couldn't create window.\n\tError: %s", SDL_GetError());
         engine_quit();
@@ -60,7 +60,7 @@ void engine_finalize(void)
     SDL_Quit();
 }
 
-void engine_load_settings(EngineSettings settings)
+void engine_set_settings(EngineSettings settings)
 {
     engine.settings = settings;
 }
@@ -80,8 +80,15 @@ void engine_run(Game game)
         last_count = now;
         fixed_time_counter += engine.update_delta;
 
-        InputEvent event;
-        game.input(&event);
+        SDL_Event event;
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_QUIT) {
+                engine_quit();
+            }
+        }
+
+        InputEvent input_event;
+        game.input(&input_event);
 
         if (fixed_time_counter >= engine.fixed_update_delta) {
             game.fixed_update(engine.fixed_update_delta);
@@ -90,7 +97,9 @@ void engine_run(Game game)
 
         game.update(engine.update_delta);
 
+        renderer_clear(engine.renderer);
         game.render();
+        renderer_present(engine.renderer);
     }
 
     game.quit();

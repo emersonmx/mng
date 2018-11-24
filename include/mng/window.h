@@ -10,7 +10,7 @@ extern "C" {
 typedef struct Window Window;
 
 
-Window* window_new(const char* title, Size size);
+Window* window_new(void);
 void window_free(Window* window);
 
 Size window_get_size(Window* window);

@@ -3,14 +3,14 @@
 #include <mng/macros.h>
 #include <mng/window_impl.h>
 
-Window* window_new(const char* title, Size size)
+Window* window_new(void)
 {
     Window* window = malloc(sizeof(Window));
     RETURN_VALUE_IF_NULL(window, NULL);
 
-    window->handler = SDL_CreateWindow(title,
+    window->handler = SDL_CreateWindow("Game Window",
         SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-        size.width, size.height, SDL_WINDOW_SHOWN
+        800, 600, SDL_WINDOW_SHOWN
     );
     RETURN_VALUE_IF_NULL(window->handler, NULL);
 

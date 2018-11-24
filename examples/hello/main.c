@@ -23,7 +23,7 @@ void Initialize(void)
         return;
     }
 
-    window = window_new("Hello world", (Size){800, 600});
+    window = window_new();
     if (window == NULL) {
         SDL_Log("Couldn't create window.\n\tError: %s", SDL_GetError());
         return;
