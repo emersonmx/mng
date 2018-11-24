@@ -15,7 +15,7 @@ Vector2 vector2_add(Vector2 a, Vector2 b);
 Vector2 vector2_subtract(Vector2 a, Vector2 b);
 Vector2 vector2_multiply(Vector2 a, double scalar);
 double vector2_length(Vector2 a);
-double vector2_length_squared(Vector2 a);
+double vector2_length2(Vector2 a);
 Vector2 vector2_normalized(Vector2 a);
 double vector2_dot(Vector2 a, Vector2 b);
 Vector2 vector2_rotated(Vector2 a, double rad);

@@ -22,7 +22,7 @@ double vector2_length(Vector2 a)
     return sqrt(a.x * a.x + a.y * a.y);
 }
 
-double vector2_length_squared(Vector2 a)
+double vector2_length2(Vector2 a)
 {
     return a.x * a.x + a.y * a.y;
 }
