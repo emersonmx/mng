@@ -34,6 +34,8 @@ void engine_finalize_renderer(void);
 
 void engine_quit(void);
 
+void engine_process_events(void);
+
 #ifdef __cplusplus
 }
 #endif

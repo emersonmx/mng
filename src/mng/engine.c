@@ -25,12 +25,7 @@ void engine_run(Game game)
         last_count = now;
         fixed_time_counter += engine.update_delta;
 
-        SDL_Event event;
-        while (SDL_PollEvent(&event)) {
-            if (event.type == SDL_QUIT) {
-                engine_quit();
-            }
-        }
+        engine_process_events();
 
         InputEvent input_event;
         game.input(&input_event);
