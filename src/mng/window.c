@@ -73,11 +73,24 @@ void window_set_size(Window* window, const Size size)
     SDL_SetWindowSize(window->handler, size.width, size.height);
 }
 
+bool window_is_resizable(Window* window)
+{
+    ASSERT_VALID_OBJECT(window);
+    Uint32 flags = SDL_GetWindowFlags(window->handler);
+    return (SDL_WINDOW_RESIZABLE & flags) == SDL_WINDOW_RESIZABLE;
+}
+
+void window_set_resizable(Window* window, bool resizable)
+{
+    ASSERT_VALID_OBJECT(window);
+    SDL_SetWindowResizable(window->handler, resizable);
+}
+
 bool window_is_fullscreen(Window* window)
 {
     ASSERT_VALID_OBJECT(window);
     Uint32 flags = SDL_GetWindowFlags(window->handler);
-    return (bool) SDL_WINDOW_FULLSCREEN & flags;
+    return (SDL_WINDOW_FULLSCREEN & flags) == SDL_WINDOW_FULLSCREEN;
 }
 
 void window_set_fullscreen(Window* window, bool fullscreen)

@@ -87,6 +87,7 @@ void _app_initialize(App* app)
     window_set_size(app->window, (Size){640, 480});
     Size size = window_get_size(app->window);
     printf("Size %dx%d\n", size.width, size.height);
+    printf("Resizable? %s\n", window_is_resizable(app->window) ? "yes": "no");
     printf("Fullscreen? %s\n",
         window_is_fullscreen(app->window) ? "yes": "no");
 

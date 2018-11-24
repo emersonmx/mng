@@ -23,6 +23,8 @@ void window_set_position(Window* window, const Point2 position);
 void window_center_position(Window* window);
 Size window_get_size(Window* window);
 void window_set_size(Window* window, const Size size);
+bool window_is_resizable(Window* window);
+void window_set_resizable(Window* window, bool resizable);
 bool window_is_fullscreen(Window* window);
 void window_set_fullscreen(Window* window, bool fullscreen);
 
