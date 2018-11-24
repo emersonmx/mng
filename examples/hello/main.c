@@ -33,6 +33,7 @@ void Initialize(void)
     printf("Title \"%s\"\n", window_get_title(window));
     Size size = window_get_size(window);
     printf("Size %dx%d\n", size.width, size.height);
+    printf("Fullscreen? %s\n", window_is_fullscreen(window) ? "yes": "no");
 
     renderer = renderer_new(window);
     if (renderer == NULL) {

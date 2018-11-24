@@ -72,3 +72,21 @@ void window_set_size(Window* window, const Size size)
     ASSERT_VALID_OBJECT(window);
     SDL_SetWindowSize(window->handler, size.width, size.height);
 }
+
+bool window_is_fullscreen(Window* window)
+{
+    ASSERT_VALID_OBJECT(window);
+    Uint32 flags = SDL_GetWindowFlags(window->handler);
+    return (bool) SDL_WINDOW_FULLSCREEN & flags;
+}
+
+void window_set_fullscreen(Window* window, bool fullscreen)
+{
+    ASSERT_VALID_OBJECT(window);
+
+    Uint32 flags = 0;
+    if (fullscreen) {
+        flags = SDL_WINDOW_FULLSCREEN;
+    }
+    SDL_SetWindowFullscreen(window->handler, flags);
+}

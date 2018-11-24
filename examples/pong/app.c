@@ -87,6 +87,8 @@ void _app_initialize(App* app)
     window_set_size(app->window, (Size){640, 480});
     Size size = window_get_size(app->window);
     printf("Size %dx%d\n", size.width, size.height);
+    printf("Fullscreen? %s\n",
+        window_is_fullscreen(app->window) ? "yes": "no");
 
     app->renderer = renderer_new(app->window);
     if (app->renderer == NULL) {
