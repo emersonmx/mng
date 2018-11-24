@@ -12,6 +12,7 @@ typedef struct Point {
     int y;
 } Point;
 
+
 Vector2 point_to_vector2(Point point);
 
 #ifdef __cplusplus
