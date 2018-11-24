@@ -20,8 +20,13 @@ typedef struct WindowSettings {
     bool fullscreen;
 } WindowSettings;
 
+typedef struct RendererSettings {
+    bool vsync;
+} RendererSettings;
+
 typedef struct EngineSettings {
     WindowSettings window;
+    RendererSettings renderer;
 } EngineSettings;
 
 void engine_set_settings(EngineSettings settings);

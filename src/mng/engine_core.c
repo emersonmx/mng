@@ -46,7 +46,11 @@ void engine_initialize_window(void)
 
 void engine_initialize_renderer(void)
 {
-    engine.renderer = renderer_new(engine.window);
+    if (engine.settings.renderer.vsync) {
+        engine.renderer = renderer_new_with_vsync(engine.window);
+    } else {
+        engine.renderer = renderer_new(engine.window);
+    }
     if (engine.renderer == NULL) {
         SDL_Log("Couldn't create renderer.\n\tError: %s", SDL_GetError());
         engine_quit();
