@@ -7,17 +7,11 @@
 #include <mng/vector2.h>
 #include <mng/point.h>
 #include <mng/line.h>
+#include <mng/color.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-typedef struct Color {
-    uint8_t red;
-    uint8_t green;
-    uint8_t blue;
-    uint8_t alpha;
-} Color;
 
 typedef struct Size {
     int width;
