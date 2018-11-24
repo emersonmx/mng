@@ -7,14 +7,14 @@
 #include <mng/window_impl.h>
 #include <mng/renderer_impl.h>
 
-Renderer* renderer_new(Window* window)
+Renderer* create_renderer(Window* window, Uint32 flags)
 {
     ASSERT_VALID_OBJECT(window);
 
     Renderer* renderer = malloc(sizeof(Renderer));
     RETURN_VALUE_IF_NULL(renderer, NULL);
 
-    renderer->handler = SDL_CreateRenderer(window->handler, -1, SDL_RENDERER_ACCELERATED);
+    renderer->handler = SDL_CreateRenderer(window->handler, -1, flags);
     RETURN_VALUE_IF_NULL(renderer->handler, NULL);
 
     SDL_SetRenderDrawBlendMode(renderer->handler, SDL_BLENDMODE_BLEND);
@@ -22,6 +22,17 @@ Renderer* renderer_new(Window* window)
     renderer->clear_color = (Color){0.0f, 0.0f, 0.0f, 1.0f};
 
     return renderer;
+}
+
+Renderer* renderer_new(Window* window)
+{
+    return create_renderer(window, SDL_RENDERER_ACCELERATED);
+}
+
+Renderer* renderer_new_with_vsync(Window* window)
+{
+    Uint32 flags = SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC;
+    return create_renderer(window, flags);
 }
 
 void renderer_free(Renderer* renderer)

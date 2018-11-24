@@ -16,6 +16,7 @@ typedef struct Renderer Renderer;
 
 
 Renderer* renderer_new(Window* window);
+Renderer* renderer_new_with_vsync(Window* window);
 void renderer_free(Renderer* renderer);
 
 void renderer_set_clear_color(Renderer* renderer, Color color);
