@@ -8,7 +8,7 @@ env.SharedLibrary('mng', [
     'engine.c',
     'game.c',
     'math.c',
-    'point.c',
+    'point2.c',
     'random.c',
     'rect.c',
     'renderer.c',

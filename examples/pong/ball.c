@@ -32,7 +32,7 @@ Rect ball_get_rect(Ball* ball)
 {
     ASSERT_VALID_OBJECT(ball);
 
-    Point point = {
+    Point2 point = {
         ball->position.x - ball->size.width / 2.0,
         ball->position.y - ball->size.height / 2.0,
     };

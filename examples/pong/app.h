@@ -3,7 +3,7 @@
 
 #include <mng/color.h>
 #include <mng/line.h>
-#include <mng/point.h>
+#include <mng/point2.h>
 #include <mng/rect.h>
 #include <mng/size.h>
 #include <mng/window.h>

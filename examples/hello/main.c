@@ -66,8 +66,8 @@ int main(int argc, char* argv[])
     Size s = texture_get_size(texture);
     sprite->region = (Rect){200, 200, s.width-200, s.height-200};
     sprite->scale = (Vector2){-0.6, 0.6};
-    sprite->position = (Point){s.width / 2.0, s.height / 2.0};
-    sprite->origin = (Point){s.width / 2.0, s.height / 2.0};
+    sprite->position = (Point2){s.width / 2.0, s.height / 2.0};
+    sprite->origin = (Point2){s.width / 2.0, s.height / 2.0};
     while (running) {
         // start_loop
         double now = timer_highres_get_ticks_in_seconds();

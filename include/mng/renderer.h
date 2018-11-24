@@ -3,7 +3,7 @@
 
 #include <mng/color.h>
 #include <mng/line.h>
-#include <mng/point.h>
+#include <mng/point2.h>
 #include <mng/rect.h>
 #include <mng/sprite.h>
 #include <mng/window.h>
@@ -21,7 +21,7 @@ void renderer_free(Renderer* renderer);
 void renderer_set_clear_color(Renderer* renderer, Color color);
 void renderer_set_draw_color(Renderer* renderer, Color color);
 
-void renderer_draw_point(Renderer* renderer, Point point);
+void renderer_draw_point2(Renderer* renderer, Point2 point);
 void renderer_draw_line(Renderer* renderer, Line line);
 void renderer_fill_rect(Renderer* renderer, Rect rect);
 

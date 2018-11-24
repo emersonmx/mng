@@ -43,7 +43,7 @@ void renderer_set_draw_color(Renderer* renderer, Color color)
     SDL_SetRenderDrawColor(renderer->handler, color.red, color.green, color.blue, color.alpha);
 }
 
-void renderer_draw_point(Renderer* renderer, Point point)
+void renderer_draw_point2(Renderer* renderer, Point2 point)
 {
     ASSERT_VALID_OBJECT(renderer);
     SDL_RenderDrawPoint(renderer->handler, point.x, point.y);
