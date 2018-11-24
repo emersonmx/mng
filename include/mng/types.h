@@ -6,15 +6,11 @@
 
 #include <mng/vector2.h>
 #include <mng/point.h>
+#include <mng/line.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-typedef struct Line {
-    Point start;
-    Point end;
-} Line;
 
 typedef struct Color {
     uint8_t red;
