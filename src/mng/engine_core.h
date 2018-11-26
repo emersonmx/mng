@@ -16,6 +16,7 @@ typedef struct Engine {
     double update_delta;
     double fixed_update_delta;
     EngineSettings settings;
+    Game game;
     Window* window;
     Renderer* renderer;
 } Engine;

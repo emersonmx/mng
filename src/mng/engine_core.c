@@ -92,5 +92,7 @@ void engine_process_events(void)
         if (event.type == SDL_QUIT) {
             engine_quit();
         }
+
+        engine.game.process_event(&event);
     }
 }

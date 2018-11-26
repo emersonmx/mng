@@ -12,9 +12,11 @@ void engine_set_settings(EngineSettings settings)
 
 void engine_run(Game game)
 {
+    engine.game = game;
+
     engine_initialize();
 
-    game.init();
+    engine.game.init();
 
     double fixed_time_counter = 0.0;
     double last_count = timer_highres_get_ticks_in_seconds();
@@ -25,24 +27,28 @@ void engine_run(Game game)
         last_count = now;
         fixed_time_counter += engine.update_delta;
 
-        engine_process_events();
+        SDL_Event event;
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_QUIT) {
+                engine_quit();
+            }
 
-        InputEvent input_event;
-        game.input(&input_event);
+            engine.game.process_event(&event);
+        }
 
         if (fixed_time_counter >= engine.fixed_update_delta) {
             game.fixed_update(engine.fixed_update_delta);
             fixed_time_counter -= engine.fixed_update_delta;
         }
 
-        game.update(engine.update_delta);
+        engine.game.update(engine.update_delta);
 
         renderer_clear(engine.renderer);
-        game.render();
+        engine.game.render();
         renderer_present(engine.renderer);
     }
 
-    game.quit();
+    engine.game.quit();
 
     engine_finalize();
 }
