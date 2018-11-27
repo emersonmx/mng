@@ -2,6 +2,8 @@
 
 #include <SDL.h>
 
+#include <mng/timer.h>
+
 Engine engine = {
     .running = true,
     .update_delta = 0.0
@@ -14,6 +16,10 @@ void engine_initialize(void)
     engine_initialize_renderer();
 
     engine.fixed_update_delta = 1/60.0;
+    engine.fixed_time_counter = 0.0;
+    engine.last_time = timer_highres_get_ticks_in_seconds();
+
+    engine.game.init();
 }
 
 void engine_initialize_libraries(void)
@@ -60,6 +66,8 @@ void engine_initialize_renderer(void)
 
 void engine_finalize(void)
 {
+    engine.game.quit();
+
     engine_finalize_renderer();
     engine_finalize_window();
     engine_finalize_libraries();
@@ -85,6 +93,14 @@ void engine_quit(void)
     engine.running = false;
 }
 
+void engine_begin_loop(void)
+{
+    engine.now_time = timer_highres_get_ticks_in_seconds();
+    engine.update_delta = engine.now_time - engine.last_time;
+    engine.last_time = engine.now_time;
+    engine.fixed_time_counter += engine.update_delta;
+}
+
 void engine_process_events(void)
 {
     SDL_Event event;
@@ -95,4 +111,21 @@ void engine_process_events(void)
 
         engine.game.process_event(&event);
     }
+}
+
+void engine_update(void)
+{
+    if (engine.fixed_time_counter >= engine.fixed_update_delta) {
+        engine.game.fixed_update(engine.fixed_update_delta);
+        engine.fixed_time_counter -= engine.fixed_update_delta;
+    }
+
+    engine.game.update(engine.update_delta);
+}
+
+void engine_render(void)
+{
+    renderer_clear(engine.renderer);
+    engine.game.render();
+    renderer_present(engine.renderer);
 }

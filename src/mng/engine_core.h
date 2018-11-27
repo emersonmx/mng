@@ -15,6 +15,9 @@ typedef struct Engine {
     bool running;
     double update_delta;
     double fixed_update_delta;
+    double now_time;
+    double last_time;
+    double fixed_time_counter;
     EngineSettings settings;
     Game game;
     Window* window;
@@ -35,7 +38,10 @@ void engine_finalize_renderer(void);
 
 void engine_quit(void);
 
+void engine_begin_loop(void);
 void engine_process_events(void);
+void engine_update(void);
+void engine_render(void);
 
 #ifdef __cplusplus
 }
