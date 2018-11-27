@@ -29,6 +29,7 @@ typedef struct EngineSettings {
     RendererSettings renderer;
 } EngineSettings;
 
+EngineSettings engine_get_settings(void);
 void engine_set_settings(EngineSettings settings);
 void engine_run(Game game);
 

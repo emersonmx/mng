@@ -4,6 +4,11 @@
 
 #include <mng/engine_core.h>
 
+EngineSettings engine_get_settings(void)
+{
+    return engine.settings;
+}
+
 void engine_set_settings(EngineSettings settings)
 {
     engine.settings = settings;
