@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
             .fullscreen = false
         },
         .renderer = {
-            .vsync = true
+            .vsync = false
         }
     };
 
