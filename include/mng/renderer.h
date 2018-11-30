@@ -21,6 +21,7 @@ void renderer_free(Renderer* renderer);
 void renderer_create(Renderer* renderer);
 void renderer_destroy(Renderer* renderer);
 
+bool renderer_was_created(Renderer* renderer);
 Color renderer_get_clear_color(Renderer* renderer);
 void renderer_set_clear_color(Renderer* renderer, Color color);
 Color renderer_get_draw_color(Renderer* renderer);

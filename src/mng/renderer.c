@@ -52,6 +52,12 @@ void renderer_destroy(Renderer* renderer)
     renderer->handler = NULL;
 }
 
+bool renderer_was_created(Renderer* renderer)
+{
+    ASSERT_VALID_OBJECT(renderer);
+    return renderer->handler != NULL;
+}
+
 Color renderer_get_clear_color(Renderer* renderer)
 {
     ASSERT_VALID_OBJECT(renderer);
