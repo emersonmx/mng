@@ -19,14 +19,17 @@ void window_free(Window* window);
 const char* window_get_title(Window* window);
 void window_set_title(Window* window, const char* title);
 Point2 window_get_position(Window* window);
-void window_set_position(Window* window, const Point2 position);
+void window_set_position(Window* window, Point2 position);
 void window_center_position(Window* window);
 Size window_get_size(Window* window);
-void window_set_size(Window* window, const Size size);
+void window_set_size(Window* window, Size size);
 bool window_is_resizable(Window* window);
 void window_set_resizable(Window* window, bool resizable);
 bool window_is_fullscreen(Window* window);
 void window_set_fullscreen(Window* window, bool fullscreen);
+
+void window_create(Window* window);
+void window_close(Window* window);
 
 #ifdef __cplusplus
 }

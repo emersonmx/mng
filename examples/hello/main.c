@@ -30,11 +30,14 @@ void Initialize(void)
     }
 
     window_set_title(window, "Hello world");
+
     printf("Title \"%s\"\n", window_get_title(window));
     Size size = window_get_size(window);
     printf("Size %dx%d\n", size.width, size.height);
     printf("Resizable? %s\n", window_is_resizable(window) ? "yes": "no");
     printf("Fullscreen? %s\n", window_is_fullscreen(window) ? "yes": "no");
+
+    window_create(window);
 
     renderer = renderer_new(window);
     if (renderer == NULL) {

@@ -48,6 +48,8 @@ void engine_initialize_window(void)
     window_set_size(engine.window, engine.settings.window.size);
     window_set_resizable(engine.window, engine.settings.window.resizable);
     window_set_fullscreen(engine.window, engine.settings.window.fullscreen);
+
+    window_create(engine.window);
 }
 
 void engine_initialize_renderer(void)

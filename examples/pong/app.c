@@ -91,6 +91,8 @@ void _app_initialize(App* app)
     printf("Fullscreen? %s\n",
         window_is_fullscreen(app->window) ? "yes": "no");
 
+    window_create(app->window);
+
     app->renderer = renderer_new(app->window);
     if (app->renderer == NULL) {
         SDL_Log("Couldn't create renderer.\n\tError: %s", SDL_GetError());
