@@ -5,6 +5,15 @@
 #include <mng/window_impl.h>
 #include <mng/renderer_impl.h>
 
+void set_render_draw_color(Renderer* renderer, Color color)
+{
+    int red = color.red * 255;
+    int green = color.green * 255;
+    int blue = color.blue * 255;
+    int alpha = color.alpha * 255;
+    SDL_SetRenderDrawColor(renderer->handler, red, green, blue, alpha);
+}
+
 Renderer* renderer_new(Window* window)
 {
     ASSERT_VALID_OBJECT(window);
@@ -68,7 +77,6 @@ void renderer_set_clear_color(Renderer* renderer, Color color)
 {
     ASSERT_VALID_OBJECT(renderer);
     renderer->clear_color = color;
-    renderer_set_draw_color(renderer, color);
 }
 
 Color renderer_get_draw_color(Renderer* renderer)
@@ -88,12 +96,6 @@ void renderer_set_draw_color(Renderer* renderer, Color color)
     ASSERT_VALID_OBJECT(renderer);
     renderer->draw_color = color;
     RETURN_IF_NULL(renderer->handler);
-
-    int red = color.red * 255;
-    int green = color.green * 255;
-    int blue = color.blue * 255;
-    int alpha = color.alpha * 255;
-    SDL_SetRenderDrawColor(renderer->handler, red, green, blue, alpha);
 }
 
 bool renderer_has_vsync(Renderer* renderer)
@@ -113,6 +115,7 @@ void renderer_draw_point2(Renderer* renderer, Point2 point)
     ASSERT_VALID_OBJECT(renderer);
     RETURN_IF_NULL(renderer->handler);
 
+    set_render_draw_color(renderer, renderer->draw_color);
     SDL_RenderDrawPoint(renderer->handler, point.x, point.y);
 }
 
@@ -121,6 +124,7 @@ void renderer_draw_line2(Renderer* renderer, Line2 line)
     ASSERT_VALID_OBJECT(renderer);
     RETURN_IF_NULL(renderer->handler);
 
+    set_render_draw_color(renderer, renderer->draw_color);
     SDL_RenderDrawLine(renderer->handler,
         line.start.x, line.start.y,
         line.end.x, line.end.y
@@ -132,6 +136,7 @@ void renderer_fill_rect(Renderer* renderer, Rect rect)
     ASSERT_VALID_OBJECT(renderer);
     RETURN_IF_NULL(renderer->handler);
 
+    set_render_draw_color(renderer, renderer->draw_color);
     SDL_Rect r = {rect.x, rect.y, rect.width, rect.height};
     SDL_RenderFillRect(renderer->handler, &r);
 }
@@ -180,7 +185,7 @@ void renderer_clear(Renderer* renderer)
     ASSERT_VALID_OBJECT(renderer);
     RETURN_IF_NULL(renderer->handler);
 
-    renderer_set_draw_color(renderer, renderer->clear_color);
+    set_render_draw_color(renderer, renderer->clear_color);
     SDL_RenderClear(renderer->handler);
 }
 
