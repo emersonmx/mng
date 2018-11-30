@@ -30,7 +30,7 @@ void window_set_fullscreen(Window* window, bool fullscreen);
 bool window_is_open(Window* window);
 
 void window_create(Window* window);
-void window_close(Window* window);
+void window_destroy(Window* window);
 
 #ifdef __cplusplus
 }

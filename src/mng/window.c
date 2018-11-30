@@ -24,7 +24,7 @@ Window* window_new(void)
 void window_free(Window* window)
 {
     RETURN_IF_NULL(window);
-    window_close(window);
+    window_destroy(window);
     free(window);
 }
 
@@ -148,7 +148,7 @@ void window_create(Window* window)
     );
 }
 
-void window_close(Window* window)
+void window_destroy(Window* window)
 {
     ASSERT_VALID_OBJECT(window);
     SDL_DestroyWindow(window->handler);
