@@ -54,16 +54,16 @@ void engine_initialize_window(void)
 
 void engine_initialize_renderer(void)
 {
-    if (engine.settings.renderer.vsync) {
-        engine.renderer = renderer_new_with_vsync(engine.window);
-    } else {
-        engine.renderer = renderer_new(engine.window);
-    }
+    engine.renderer = renderer_new(engine.window);
     if (engine.renderer == NULL) {
         SDL_Log("Couldn't create renderer.\n\tError: %s", SDL_GetError());
         engine_quit();
         return;
     }
+
+    renderer_set_vsync(engine.renderer, engine.settings.renderer.vsync);
+
+    renderer_create(engine.renderer);
 }
 
 void engine_finalize(void)

@@ -45,6 +45,8 @@ void Initialize(void)
         return;
     }
 
+    renderer_create(renderer);
+
     texture = load_texture(renderer, "assets/hello.png");
     sprite = sprite_new();
     sprite->texture = texture;

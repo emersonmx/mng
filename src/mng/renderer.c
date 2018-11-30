@@ -1,56 +1,88 @@
 #include <mng/renderer.h>
 
-#include <stdio.h>
-
 #include <mng/macros.h>
 #include <mng/texture_impl.h>
 #include <mng/window_impl.h>
 #include <mng/renderer_impl.h>
 
-Renderer* create_renderer(Window* window, Uint32 flags)
+Renderer* renderer_new(Window* window)
 {
     ASSERT_VALID_OBJECT(window);
 
     Renderer* renderer = malloc(sizeof(Renderer));
     RETURN_VALUE_IF_NULL(renderer, NULL);
 
-    renderer->handler = SDL_CreateRenderer(window->handler, -1, flags);
-    RETURN_VALUE_IF_NULL(renderer->handler, NULL);
-
-    SDL_SetRenderDrawBlendMode(renderer->handler, SDL_BLENDMODE_BLEND);
-
+    renderer->window = window;
+    renderer->handler = NULL;
     renderer->clear_color = (Color){0.0f, 0.0f, 0.0f, 1.0f};
+    renderer->vsync = false;
 
     return renderer;
-}
-
-Renderer* renderer_new(Window* window)
-{
-    return create_renderer(window, SDL_RENDERER_ACCELERATED);
-}
-
-Renderer* renderer_new_with_vsync(Window* window)
-{
-    Uint32 flags = SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC;
-    return create_renderer(window, flags);
 }
 
 void renderer_free(Renderer* renderer)
 {
     RETURN_IF_NULL(renderer);
-    SDL_DestroyRenderer(renderer->handler);
+    renderer_destroy(renderer);
     free(renderer);
+}
+
+void renderer_create(Renderer* renderer)
+{
+    ASSERT_VALID_OBJECT(renderer);
+
+    renderer_destroy(renderer);
+
+    Uint32 flags = SDL_RENDERER_ACCELERATED;
+    if (renderer->vsync) {
+        flags |= SDL_RENDERER_PRESENTVSYNC;
+    }
+
+    Window* window = renderer->window;
+    renderer->handler = SDL_CreateRenderer(window->handler, -1, flags);
+    RETURN_IF_NULL(renderer->handler);
+
+    SDL_SetRenderDrawBlendMode(renderer->handler, SDL_BLENDMODE_BLEND);
+}
+
+void renderer_destroy(Renderer* renderer)
+{
+    ASSERT_VALID_OBJECT(renderer);
+    SDL_DestroyRenderer(renderer->handler);
+    renderer->handler = NULL;
+}
+
+Color renderer_get_clear_color(Renderer* renderer)
+{
+    ASSERT_VALID_OBJECT(renderer);
+    return renderer->clear_color;
 }
 
 void renderer_set_clear_color(Renderer* renderer, Color color)
 {
     ASSERT_VALID_OBJECT(renderer);
     renderer->clear_color = color;
+    renderer_set_draw_color(renderer, color);
+}
+
+Color renderer_get_draw_color(Renderer* renderer)
+{
+    ASSERT_VALID_OBJECT(renderer);
+    RETURN_VALUE_IF_NULL(renderer->handler, renderer->draw_color);
+
+    Uint8 r, g, b, a;
+    SDL_GetRenderDrawColor(renderer->handler, &r, &g, &b, &a);
+    return (Color){
+        .red = r/255.0f, .green = g/255.0f, .blue = b/255.0f, .alpha = a/255.0f
+    };
 }
 
 void renderer_set_draw_color(Renderer* renderer, Color color)
 {
     ASSERT_VALID_OBJECT(renderer);
+    renderer->draw_color = color;
+    RETURN_IF_NULL(renderer->handler);
+
     int red = color.red * 255;
     int green = color.green * 255;
     int blue = color.blue * 255;
@@ -58,15 +90,31 @@ void renderer_set_draw_color(Renderer* renderer, Color color)
     SDL_SetRenderDrawColor(renderer->handler, red, green, blue, alpha);
 }
 
+bool renderer_has_vsync(Renderer* renderer)
+{
+    ASSERT_VALID_OBJECT(renderer);
+    return renderer->vsync;
+}
+
+void renderer_set_vsync(Renderer* renderer, bool vsync)
+{
+    ASSERT_VALID_OBJECT(renderer);
+    renderer->vsync = vsync;
+}
+
 void renderer_draw_point2(Renderer* renderer, Point2 point)
 {
     ASSERT_VALID_OBJECT(renderer);
+    RETURN_IF_NULL(renderer->handler);
+
     SDL_RenderDrawPoint(renderer->handler, point.x, point.y);
 }
 
 void renderer_draw_line2(Renderer* renderer, Line2 line)
 {
     ASSERT_VALID_OBJECT(renderer);
+    RETURN_IF_NULL(renderer->handler);
+
     SDL_RenderDrawLine(renderer->handler,
         line.start.x, line.start.y,
         line.end.x, line.end.y
@@ -76,6 +124,8 @@ void renderer_draw_line2(Renderer* renderer, Line2 line)
 void renderer_fill_rect(Renderer* renderer, Rect rect)
 {
     ASSERT_VALID_OBJECT(renderer);
+    RETURN_IF_NULL(renderer->handler);
+
     SDL_Rect r = {rect.x, rect.y, rect.width, rect.height};
     SDL_RenderFillRect(renderer->handler, &r);
 }
@@ -83,6 +133,7 @@ void renderer_fill_rect(Renderer* renderer, Rect rect)
 void renderer_draw_sprite(Renderer* renderer, Sprite* sprite)
 {
     ASSERT_VALID_OBJECT(renderer);
+    RETURN_IF_NULL(renderer->handler);
     RETURN_IF_NULL(sprite);
     RETURN_IF_NULL(sprite->texture);
 
@@ -121,6 +172,8 @@ void renderer_draw_sprite(Renderer* renderer, Sprite* sprite)
 void renderer_clear(Renderer* renderer)
 {
     ASSERT_VALID_OBJECT(renderer);
+    RETURN_IF_NULL(renderer->handler);
+
     renderer_set_draw_color(renderer, renderer->clear_color);
     SDL_RenderClear(renderer->handler);
 }
@@ -128,6 +181,8 @@ void renderer_clear(Renderer* renderer)
 void renderer_present(Renderer* renderer)
 {
     ASSERT_VALID_OBJECT(renderer);
+    RETURN_IF_NULL(renderer->handler);
+
     SDL_RenderPresent(renderer->handler);
 }
 

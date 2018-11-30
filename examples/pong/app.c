@@ -99,6 +99,8 @@ void _app_initialize(App* app)
         return;
     }
 
+    renderer_create(app->renderer);
+
     app_ready(app);
 }
 
