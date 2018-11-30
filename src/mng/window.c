@@ -28,6 +28,12 @@ void window_free(Window* window)
     free(window);
 }
 
+bool window_was_created(Window* window)
+{
+    ASSERT_VALID_OBJECT(window);
+    return window->handler != NULL;
+}
+
 const char* window_get_title(Window* window)
 {
     ASSERT_VALID_OBJECT(window);
@@ -129,12 +135,6 @@ void window_set_fullscreen(Window* window, bool fullscreen)
         flags = SDL_WINDOW_FULLSCREEN;
     }
     SDL_SetWindowFullscreen(window->handler, flags);
-}
-
-bool window_is_open(Window* window)
-{
-    ASSERT_VALID_OBJECT(window);
-    return window->handler != NULL;
 }
 
 void window_create(Window* window)
