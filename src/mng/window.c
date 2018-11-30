@@ -131,6 +131,12 @@ void window_set_fullscreen(Window* window, bool fullscreen)
     SDL_SetWindowFullscreen(window->handler, flags);
 }
 
+bool window_is_open(Window* window)
+{
+    ASSERT_VALID_OBJECT(window);
+    return window->handler != NULL;
+}
+
 void window_create(Window* window)
 {
     ASSERT_VALID_OBJECT(window);

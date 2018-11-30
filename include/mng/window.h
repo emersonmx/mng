@@ -27,6 +27,7 @@ bool window_is_resizable(Window* window);
 void window_set_resizable(Window* window, bool resizable);
 bool window_is_fullscreen(Window* window);
 void window_set_fullscreen(Window* window, bool fullscreen);
+bool window_is_open(Window* window);
 
 void window_create(Window* window);
 void window_close(Window* window);
