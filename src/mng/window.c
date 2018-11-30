@@ -141,6 +141,8 @@ void window_create(Window* window)
 {
     ASSERT_VALID_OBJECT(window);
 
+    window_destroy(window);
+
     window->handler = SDL_CreateWindow(window->title,
         window->position.x, window->position.y,
         window->size.width, window->size.height,
