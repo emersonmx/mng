@@ -37,9 +37,7 @@ bool window_was_created(Window* window)
 const char* window_get_title(Window* window)
 {
     ASSERT_VALID_OBJECT(window);
-    RETURN_VALUE_IF_NULL(window->handler, window->title);
-
-    return SDL_GetWindowTitle(window->handler);
+    return window->title;
 }
 
 void window_set_title(Window* window, const char* title)
@@ -54,11 +52,7 @@ void window_set_title(Window* window, const char* title)
 Point2 window_get_position(Window* window)
 {
     ASSERT_VALID_OBJECT(window);
-    RETURN_VALUE_IF_NULL(window->handler, window->position);
-
-    Point2 position;
-    SDL_GetWindowPosition(window->handler, &position.x, &position.y);
-    return position;
+    return window->position;
 }
 
 void window_set_position(Window* window, Point2 position)
@@ -81,11 +75,7 @@ void window_center_position(Window* window)
 Size window_get_size(Window* window)
 {
     ASSERT_VALID_OBJECT(window);
-    RETURN_VALUE_IF_NULL(window->handler, window->size);
-
-    Size size;
-    SDL_GetWindowSize(window->handler, &size.width, &size.height);
-    return size;
+    return window->size;
 }
 
 void window_set_size(Window* window, Size size)
@@ -100,10 +90,7 @@ void window_set_size(Window* window, Size size)
 bool window_is_resizable(Window* window)
 {
     ASSERT_VALID_OBJECT(window);
-    RETURN_VALUE_IF_NULL(window->handler, window->resizable);
-
-    Uint32 flags = SDL_GetWindowFlags(window->handler);
-    return (SDL_WINDOW_RESIZABLE & flags) == SDL_WINDOW_RESIZABLE;
+    return window->resizable;
 }
 
 void window_set_resizable(Window* window, bool resizable)
@@ -118,10 +105,7 @@ void window_set_resizable(Window* window, bool resizable)
 bool window_is_fullscreen(Window* window)
 {
     ASSERT_VALID_OBJECT(window);
-    RETURN_VALUE_IF_NULL(window->handler, window->fullscreen);
-
-    Uint32 flags = SDL_GetWindowFlags(window->handler);
-    return (SDL_WINDOW_FULLSCREEN & flags) == SDL_WINDOW_FULLSCREEN;
+    return window->fullscreen;
 }
 
 void window_set_fullscreen(Window* window, bool fullscreen)
