@@ -82,20 +82,13 @@ void renderer_set_clear_color(Renderer* renderer, Color color)
 Color renderer_get_draw_color(Renderer* renderer)
 {
     ASSERT_VALID_OBJECT(renderer);
-    RETURN_VALUE_IF_NULL(renderer->handler, renderer->draw_color);
-
-    Uint8 r, g, b, a;
-    SDL_GetRenderDrawColor(renderer->handler, &r, &g, &b, &a);
-    return (Color){
-        .red = r/255.0f, .green = g/255.0f, .blue = b/255.0f, .alpha = a/255.0f
-    };
+    return renderer->draw_color;
 }
 
 void renderer_set_draw_color(Renderer* renderer, Color color)
 {
     ASSERT_VALID_OBJECT(renderer);
     renderer->draw_color = color;
-    RETURN_IF_NULL(renderer->handler);
 }
 
 bool renderer_has_vsync(Renderer* renderer)
