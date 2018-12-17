@@ -143,8 +143,8 @@ void renderer_draw_sprite(Renderer* renderer, Sprite* sprite)
 
     double angle = sprite->rotation;
     SDL_Point center = {
-        sprite->origin.x * fabsf(sprite->scale.x),
-        sprite->origin.y * fabsf(sprite->scale.y)
+        sprite->origin.x * fabs(sprite->scale.x),
+        sprite->origin.y * fabs(sprite->scale.y)
     };
 
     SDL_Rect srcrect = {
@@ -154,8 +154,8 @@ void renderer_draw_sprite(Renderer* renderer, Sprite* sprite)
     SDL_Rect dstrect = {
         sprite->position.x - center.x,
         sprite->position.y - center.y,
-        sprite->texture->size.width * fabsf(sprite->scale.x),
-        sprite->texture->size.height * fabsf(sprite->scale.y)
+        sprite->texture->size.width * fabs(sprite->scale.x),
+        sprite->texture->size.height * fabs(sprite->scale.y)
     };
 
     SDL_RendererFlip flip = SDL_FLIP_NONE;
