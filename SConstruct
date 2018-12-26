@@ -20,7 +20,7 @@ env = Environment(
 )
 
 build_type = ARGUMENTS.get('build', 'debug')
-if  build_type == 'debug':
+if build_type == 'debug':
     env.Append(
         CFLAGS=DEBUG_CFLAGS,
     )
