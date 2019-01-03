@@ -1,13 +1,11 @@
 #ifndef MNG_EVENT_H
 #define MNG_EVENT_H
 
-#include <SDL_events.h>
-
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-typedef SDL_Event Event;
+typedef void* Event;
 
 #ifdef __cplusplus
 }

@@ -111,7 +111,7 @@ void engine_process_events(void)
             engine_quit();
         }
 
-        engine.game.process_event(&event);
+        engine.game.process_event((void*) &event);
     }
 }
 
