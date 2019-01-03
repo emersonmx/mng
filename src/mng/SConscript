@@ -4,6 +4,12 @@ env = env.Clone()
 env.ParseConfig('pkg-config sdl2 --cflags --libs')
 env.ParseConfig('pkg-config SDL2_image --cflags --libs')
 
+conf = env.Configure()
+if not conf.CheckLib('SDL2'):
+    print('Did not find SDL2, exiting!')
+    Exit(1)
+env = conf.Finish()
+
 env.SharedLibrary('mng', [
     'engine.c',
     'engine_core.c',
