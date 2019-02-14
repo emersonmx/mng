@@ -3,8 +3,9 @@ set -euo pipefail
 IFS=$'\n\t'
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PROJECT_ROOT="$SCRIPT_DIR/.."
 
-export LD_LIBRARY_PATH="$SCRIPT_DIR/build/src/mng/"
+export LD_LIBRARY_PATH="$PROJECT_ROOT/build/src/mng/"
 
 if [ $# != 1 ]
 then
@@ -12,4 +13,4 @@ then
     exit
 fi
 
-(cd "$SCRIPT_DIR/examples/$1" && "$SCRIPT_DIR/build/examples/$1/$1")
+(cd "$PROJECT_ROOT/examples/$1" && "$PROJECT_ROOT/build/examples/$1/$1")
